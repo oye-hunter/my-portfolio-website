@@ -1,103 +1,130 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
+import { Cursor } from "@/components/Cursor";
+import { Experience } from "@/components/Experience";
+import { Hero } from "@/components/Hero";
+import { Nav } from "@/components/Nav";
+import { Projects } from "@/components/Projects";
+import { Skills } from "@/components/Skills";
+
+const sectionIds = ["hero", "about", "projects", "experience", "skills", "contact"];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeSection, setActiveSection] = useState("hero");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  useEffect(() => {
+    const cursor = document.getElementById("cursor");
+
+    const moveCursor = (event: MouseEvent) => {
+      if (!cursor) {
+        return;
+      }
+
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+    };
+
+    document.addEventListener("mousemove", moveCursor);
+
+    const interactiveNodes = document.querySelectorAll("a, button, input, textarea");
+    const onEnter = () => cursor?.classList.add("expand");
+    const onLeave = () => cursor?.classList.remove("expand");
+
+    interactiveNodes.forEach((node) => {
+      node.addEventListener("mouseenter", onEnter);
+      node.addEventListener("mouseleave", onLeave);
+    });
+
+    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    revealNodes.forEach((node, index) => {
+      node.dataset.revealOrder = index.toString();
+    });
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = Number((entry.target as HTMLElement).dataset.revealOrder ?? "0") % 6;
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, delay * 80);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    revealNodes.forEach((node) => revealObserver.observe(node));
+
+    const skillObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".skillFill").forEach((fill) => {
+              fill.classList.add("animated");
+            });
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    const skillGroups = document.querySelectorAll(".skillGroup");
+    skillGroups.forEach((group) => skillObserver.observe(group));
+
+    const handleScroll = () => {
+      const current = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((section): section is HTMLElement => Boolean(section))
+        .reduce((active, section) => {
+          if (window.scrollY >= section.offsetTop - 220) {
+            return section.id;
+          }
+
+          return active;
+        }, "hero");
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      document.removeEventListener("mousemove", moveCursor);
+
+      interactiveNodes.forEach((node) => {
+        node.removeEventListener("mouseenter", onEnter);
+        node.removeEventListener("mouseleave", onLeave);
+      });
+
+      revealObserver.disconnect();
+      skillObserver.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <Cursor />
+      <Nav activeSection={activeSection} />
+      <main className="pageMain">
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Skills />
+        <Contact />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="footer">
+        <p>
+          Engineered and designed by <strong>Muhammad Hassan Mughal</strong>
+        </p>
+        <p>Built with Next.js, TypeScript, and a custom CRT interface system.</p>
       </footer>
-    </div>
+    </>
   );
 }
