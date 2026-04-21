@@ -3,7 +3,6 @@ import { identity } from "./portfolio-data";
 export function Hero() {
   return (
     <section id="hero" className="section hero">
-      <div className="heroGridBg" />
       <div className="heroContent">
         <p className="heroPrompt reveal">$ initialize --profile hassan</p>
         <h1 className="heroName reveal">

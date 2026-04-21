@@ -3,6 +3,7 @@
   --amber-dim: #b07800;
   --amber-glow: #ffd04080;
   --amber-faint: #3a2a00;
+  --amber-grid: rgba(58, 42, 0, 0.34);
   --bg: #0a0800;
   --bg-panel: #0f0c00;
   --green: #39ff14;
@@ -22,6 +23,11 @@ html {
 
 body {
   background: var(--bg);
+  background-image:
+    linear-gradient(var(--amber-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--amber-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
   color: var(--amber);
   font-family: var(--font-body), monospace;
   font-size: 16px;
@@ -236,13 +242,7 @@ body::after {
 }
 
 .heroGridBg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--amber-faint) 1px, transparent 1px),
-    linear-gradient(90deg, var(--amber-faint) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.35;
+  display: none;
 }
 
 .heroContent {

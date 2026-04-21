@@ -10,7 +10,7 @@ export function Skills() {
       <div className="skillsGrid">
         {skills.map((group) => (
           <div className="skillGroup reveal" key={group.title}>
-            <h3>// {group.title}</h3>
+            <h3>{`// ${group.title}`}</h3>
             {group.items.map((item) => (
               <div className="skillItem" key={`${group.title}-${item.label}`}>
                 <div className="skillHeader">

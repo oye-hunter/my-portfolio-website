@@ -33,19 +33,19 @@ export function About() {
             <span className="val">{'{'}</span>
           </div>
           <div className="line">
-            &nbsp;&nbsp;<span className="cmd">"name"</span>: <span className="val">"{identity.name}"</span>,
+            &nbsp;&nbsp;<span className="cmd">&quot;name&quot;</span>: <span className="val">&quot;{identity.name}&quot;</span>,
           </div>
           <div className="line">
-            &nbsp;&nbsp;<span className="cmd">"role"</span>: <span className="val">"{identity.role}"</span>,
+            &nbsp;&nbsp;<span className="cmd">&quot;role&quot;</span>: <span className="val">&quot;{identity.role}&quot;</span>,
           </div>
           <div className="line">
-            &nbsp;&nbsp;<span className="cmd">"specialization"</span>: <span className="val">"{identity.specialization}"</span>,
+            &nbsp;&nbsp;<span className="cmd">&quot;specialization&quot;</span>: <span className="val">&quot;{identity.specialization}&quot;</span>,
           </div>
           <div className="line">
-            &nbsp;&nbsp;<span className="cmd">"experience"</span>: <span className="val">"{identity.experience}"</span>,
+            &nbsp;&nbsp;<span className="cmd">&quot;experience&quot;</span>: <span className="val">&quot;{identity.experience}&quot;</span>,
           </div>
           <div className="line">
-            &nbsp;&nbsp;<span className="cmd">"availability"</span>: <span className="ok">"{identity.availability}"</span>
+            &nbsp;&nbsp;<span className="cmd">&quot;availability&quot;</span>: <span className="ok">&quot;{identity.availability}&quot;</span>
           </div>
           <div className="line">
             <span className="val">{'}'}</span>
