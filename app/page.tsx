@@ -30,27 +30,24 @@ export default function Home() {
     document.addEventListener("mousemove", moveCursor);
 
     const interactiveNodes = document.querySelectorAll("a, button, input, textarea");
-    const onEnter = () => cursor?.classList.add("expand");
-    const onLeave = () => cursor?.classList.remove("expand");
+    const onEnter = () => cursor?.classList.add("w-9", "h-9", "opacity-60");
+    const onLeave = () => cursor?.classList.remove("w-9", "h-9", "opacity-60");
 
     interactiveNodes.forEach((node) => {
       node.addEventListener("mouseenter", onEnter);
       node.addEventListener("mouseleave", onLeave);
     });
 
-    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     revealNodes.forEach((node, index) => {
-      node.dataset.revealOrder = index.toString();
+      node.style.transitionDelay = `${index * 80}ms`;
     });
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const delay = Number((entry.target as HTMLElement).dataset.revealOrder ?? "0") % 6;
-            setTimeout(() => {
-              entry.target.classList.add("visible");
-            }, delay * 80);
+            entry.target.classList.add("visible");
           }
         });
       },
@@ -63,8 +60,12 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".skillFill").forEach((fill) => {
-              fill.classList.add("animated");
+            entry.target.querySelectorAll<HTMLElement>("[data-skill-fill]").forEach((fill) => {
+              const width = fill.dataset.width;
+
+              if (width) {
+                fill.style.width = width;
+              }
             });
           }
         });
@@ -72,7 +73,7 @@ export default function Home() {
       { threshold: 0.3 },
     );
 
-    const skillGroups = document.querySelectorAll(".skillGroup");
+    const skillGroups = document.querySelectorAll("[data-skill-group]");
     skillGroups.forEach((group) => skillObserver.observe(group));
 
     const handleScroll = () => {
@@ -111,7 +112,26 @@ export default function Home() {
     <>
       <Cursor />
       <Nav activeSection={activeSection} />
-      <main className="pageMain">
+      <main className="relative isolate">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[998] bg-[linear-gradient(0deg,rgba(0,0,0,0.18)_0,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)]"
+          style={{ animation: "scanMove 8s linear infinite" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[999] bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.55)_100%)]"
+          style={{ animation: "flicker 0.15s infinite" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 right-0 top-[100vh] bottom-0 z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(58, 42, 0, 0.34) 1px, transparent 1px), linear-gradient(90deg, rgba(58, 42, 0, 0.34) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
         <Hero />
         <About />
         <Projects />
@@ -119,11 +139,11 @@ export default function Home() {
         <Skills />
         <Contact />
       </main>
-      <footer className="footer">
+      <footer className="relative z-10 border-t border-dashed border-[#3a2a00] px-6 py-10 text-center font-[var(--font-mono)] text-[0.72rem] tracking-[0.15em] text-[#3a2a00] md:px-8 lg:px-12">
         <p>
-          Engineered and designed by <strong>Muhammad Hassan Mughal</strong>
+          Engineered and designed by <strong className="text-[#b07800]">Muhammad Hassan Mughal</strong>
         </p>
-        <p>Built with Next.js, TypeScript, and a custom CRT interface system.</p>
+        <p>Built with Next.js, TypeScript, and a Tailwind-driven CRT interface system.</p>
       </footer>
     </>
   );

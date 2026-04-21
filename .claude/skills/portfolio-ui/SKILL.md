@@ -14,7 +14,7 @@ This is a **single-page developer portfolio** built with Next.js. It has five se
 ## Tech Stack
 
 - **Framework**: Next.js (App Router)
-- **Styling**: CSS Modules or `<style>` tags — no Tailwind, no CSS-in-JS unless already present
+- **Styling**: Tailwind CSS utilities first, with minimal global CSS only for shared tokens or base imports
 - **Fonts**: VT323 (display/headings), Share Tech Mono (UI/labels), Courier Prime (body text) — loaded from Google Fonts
 - **Animations**: CSS-only (keyframes, transitions) — no animation libraries unless explicitly asked
 - **Icons**: Plain Unicode characters or inline SVG — no icon libraries
@@ -98,7 +98,7 @@ This is a **single-page developer portfolio** built with Next.js. It has five se
 ## Behavior Rules
 
 - **Retro first**: Every new component must feel like it belongs on a CRT screen. When in doubt, add a glow or a monospace label.
-- **No new dependencies**: Do not introduce npm packages for things achievable with CSS + vanilla JS.
+- **No new dependencies**: Do not introduce npm packages for things achievable with Tailwind utilities, CSS, or vanilla JS.
 - **Cursor**: All interactive elements must use `cursor: none` to respect the custom cursor.
 - **Responsive**: Mobile breakpoint at `768px` — single-column layouts, reduced padding, smaller hero font.
 - **Sections numbered**: Labels follow the pattern `01 / About`, `02 / Projects`, etc. Increment for any new sections.
@@ -127,7 +127,7 @@ my-portfolio/
 ├── app/
 │   ├── page.tsx                 ← Main single-page layout
 │   ├── layout.tsx               ← Font imports go here
-│   └── globals.css              ← All CSS variables + global styles
+│   └── globals.css              ← Tailwind import + shared tokens only
 ├── components/
 │   ├── Hero.tsx
 │   ├── About.tsx

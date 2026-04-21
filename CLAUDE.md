@@ -10,9 +10,9 @@ Aesthetic: amber-on-black CRT terminal with scanlines, phosphor glow, and monosp
 ## Tech Stack
 
 - **Framework**: Next.js (App Router), TypeScript
-- **Styling**: CSS Modules + `app/globals.css` for design tokens
+- **Styling**: Tailwind CSS utilities first, with `app/globals.css` kept minimal for shared tokens and base imports
 - **Fonts**: VT323, Share Tech Mono, Courier Prime (Google Fonts via `app/layout.tsx`)
-- **No UI libraries** — no Tailwind, no shadcn, no Radix
+- **No UI libraries** — no shadcn, no Radix
 - **No animation libraries** — CSS keyframes only
 
 ## Commands
@@ -27,7 +27,8 @@ Aesthetic: amber-on-black CRT terminal with scanlines, phosphor glow, and monosp
 - TypeScript strict mode, no `any`
 - Named exports for all components
 - Functional components only, no class components
-- CSS variables defined in `globals.css`, never hardcode colors
+- Prefer Tailwind utilities for layout, spacing, borders, and responsive behavior
+- Shared tokens may live in `globals.css`, but avoid large custom CSS blocks
 - File names: PascalCase for components (`Hero.tsx`), kebab-case for utils (`scroll-utils.ts`)
 
 ## Architecture
@@ -43,7 +44,7 @@ Aesthetic: amber-on-black CRT terminal with scanlines, phosphor glow, and monosp
 - NEVER use `cursor: auto` or `cursor: pointer` — always `cursor: none` (custom cursor handles it)
 - NEVER import a font other than VT323, Share Tech Mono, or Courier Prime
 - Always add `.reveal` class + IntersectionObserver for new scroll-animated elements
-- Keep `body::before` (scanlines) and `body::after` (CRT vignette) intact in globals.css
+- Keep the CRT scanline and vignette treatment intact, but prefer Tailwind utilities or lightweight base styles over large custom CSS blocks
 - Section labels follow the format: `01 / About`, `02 / Projects` — increment for new sections
 
 ## Skill — REQUIRED READING
@@ -63,7 +64,7 @@ Every visual or structural change must conform to what is defined in that file.
 
 ## See Also
 
-- @app/globals.css — CSS variables and global styles
+- @app/globals.css — Tailwind import and shared theme tokens
 - @components/ — all section components
 
 ## Portfolio Content Source Of Truth
