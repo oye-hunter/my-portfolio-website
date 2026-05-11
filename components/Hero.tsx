@@ -22,7 +22,7 @@ export function Hero() {
           </p>
           <h1
             data-reveal
-            className="reveal my-5 text-[clamp(4rem,10vw,9rem)] leading-[0.8] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700"
+            className="reveal my-5 text-[clamp(4rem,10vw,9rem)] leading-[0.8] tracking-[-0.05em] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700"
           >
             {/* {identity.name.split(" ").slice(0, 2).join(" ")}
             <br />

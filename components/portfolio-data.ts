@@ -29,7 +29,7 @@ export const identity = {
   role: "Full-Stack Software Developer",
   specialization: "SaaS & MVP Development",
   location: "Rawalpindi, Pakistan",
-  experience: "1.5+ years",
+  experience: "2+ years",
   currentRole: "Software Developer @ Komatsu Pak Soft",
   availability: "Open to freelance opportunities",
 };

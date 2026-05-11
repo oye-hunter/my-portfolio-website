@@ -140,7 +140,7 @@ export default function Home() {
         <Contact />
       </main>
       <a
-        className="fixed bottom-5 right-5 z-[1001] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7"
+        className="fixed bottom-5 right-5 z-[10] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7"
         href="/resume.pdf"
         download="Muhammad-Hassan-Mughal-CV.pdf"
         aria-label="Download CV"
