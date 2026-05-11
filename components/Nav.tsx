@@ -19,7 +19,7 @@ export function Nav({ activeSection }: NavProps) {
           href="#hero"
           aria-label="Go to top"
         >
-          DEV<span className="text-[#39ff14]">.</span>FOLIO
+          HASSAN<span className="text-[#39ff14]">.</span>DEV
         </a>
         <ul className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
         {navItems.map((item) => (

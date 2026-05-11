@@ -139,6 +139,14 @@ export default function Home() {
         <Skills />
         <Contact />
       </main>
+      <a
+        className="fixed bottom-5 right-5 z-[1001] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7"
+        href="/resume.pdf"
+        download="Muhammad-Hassan-Mughal-CV.pdf"
+        aria-label="Download CV"
+      >
+        [ Download CV ]
+      </a>
       <footer className="relative z-10 border-t border-dashed border-[#3a2a00] px-6 py-10 text-center font-[var(--font-mono)] text-[0.72rem] tracking-[0.15em] text-[#3a2a00] md:px-8 lg:px-12">
         <p>
           Engineered and designed by <strong className="text-[#b07800]">Muhammad Hassan Mughal</strong>
