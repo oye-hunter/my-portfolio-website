@@ -25,7 +25,7 @@ export type ExperienceItem = {
 };
 
 export const identity = {
-  name: "Muhammad Hassan Mughal",
+  name: "Hassan Mughal",
   role: "Full-Stack Software Developer",
   specialization: "SaaS & MVP Development",
   location: "Rawalpindi, Pakistan",

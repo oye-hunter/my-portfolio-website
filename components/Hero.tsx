@@ -2,7 +2,7 @@ import { identity } from "./portfolio-data";
 
 export function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden pt-12">
+    <section id="hero" className="relative min-h-screen overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-[position:center_left] bg-no-repeat"
         style={{
@@ -12,25 +12,26 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(10,8,0,0.62)_100%)]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-6 py-16 md:px-8 lg:px-12">
-        <div className="ml-auto w-full max-w-2xl text-right max-md:ml-0 max-md:text-left">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 md:px-8 lg:px-12">
+        <div className="ml-auto w-full max-w-3xl text-right max-md:ml-0 max-md:text-left">
           <p
             data-reveal
-            className="reveal opacity-0 translate-y-8 text-sm font-[var(--font-mono)] uppercase tracking-[0.3em] text-[#39ff14] transition-all duration-700"
+            className="reveal opacity-0 translate-y-0 text-sm font-[var(--font-mono)] uppercase tracking-[0.24em] text-[#39ff14] transition-all duration-700"
           >
             $ initialize --profile hassan
           </p>
           <h1
             data-reveal
-            className="reveal mt-3 text-[clamp(4rem,10vw,9rem)] leading-[0.9] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700"
+            className="reveal my-5 text-[clamp(4rem,10vw,9rem)] leading-[0.8] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700"
           >
-            {identity.name.split(" ").slice(0, 2).join(" ")}
+            {/* {identity.name.split(" ").slice(0, 2).join(" ")}
             <br />
-            {identity.name.split(" ").slice(2).join(" ")}
+            {identity.name.split(" ").slice(2).join(" ")} */}
+            {identity.name}
           </h1>
           <h2
             data-reveal
-            className="reveal mt-4 text-[clamp(1rem,2.5vw,1.4rem)] uppercase tracking-[0.1em] text-[#b07800] transition-all duration-700"
+            className="reveal mt-3 text-[clamp(1rem,2.5vw,1.4rem)] uppercase tracking-[0.07em] text-[#b07800] transition-all duration-700"
           >
             Full-Stack Engineer for SaaS and MVP Delivery <span className="text-[#ffb000]">█</span>
           </h2>
@@ -47,13 +48,13 @@ export function Hero() {
             className="reveal mt-10 flex flex-wrap justify-end gap-4 transition-all duration-700 max-md:justify-start"
           >
             <a
-              className="inline-flex items-center justify-center border border-[#ffb000] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.15em] text-[#ffb000] no-underline transition-colors duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)]"
+              className="inline-flex items-center justify-center border border-[#ffb000] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline transition-colors duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)]"
               href="#projects"
             >
               View Projects
             </a>
             <a
-              className="inline-flex items-center justify-center border border-[#b07800] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.15em] text-[#b07800] no-underline transition-colors duration-200 hover:bg-[#b07800] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.35)]"
+              className="inline-flex items-center justify-center border border-[#b07800] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#b07800] no-underline transition-colors duration-200 hover:bg-[#b07800] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.35)]"
               href="#contact"
             >
               Contact Me
