@@ -1,18 +1,29 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { identity } from "./portfolio-data";
 
 export function Hero() {
-  return (
-    <section id="hero" className="relative min-h-screen overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-[position:center_left] bg-no-repeat"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(10,8,0,0.18) 0%, rgba(10,8,0,0.55) 58%, rgba(10,8,0,0.92) 100%), linear-gradient(to top, rgba(10,8,0,0.45) 0%, rgba(10,8,0,0.12) 45%, rgba(10,8,0,0.35) 100%), url('/wide-hero-banner.png')",
-        }}
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(10,8,0,0.62)_100%)]" />
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Full-Stack Engineer for SaaS & MVP Delivery";
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 md:px-8 lg:px-12">
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setTypedText(fullText.slice(0, index));
+      index++;
+      if (index > fullText.length) clearInterval(interval);
+    }, 45);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section id="hero" className="relative min-h-screen overflow-hidden flex items-center">
+      {/* Vignette Overlay */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(10,8,0,0.75)_100%)] z-10" />
+
+      <div className="relative z-20 mx-auto flex w-full max-w-7xl px-6 md:px-8 lg:px-12">
         <div className="ml-auto w-full max-w-3xl text-right max-md:ml-0 max-md:text-left">
           <p
             data-reveal
@@ -24,16 +35,13 @@ export function Hero() {
             data-reveal
             className="reveal my-5 text-[clamp(4rem,10vw,9rem)] leading-[0.8] tracking-[-0.05em] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700"
           >
-            {/* {identity.name.split(" ").slice(0, 2).join(" ")}
-            <br />
-            {identity.name.split(" ").slice(2).join(" ")} */}
             {identity.name}
           </h1>
           <h2
             data-reveal
-            className="reveal mt-3 text-[clamp(1rem,2.5vw,1.4rem)] uppercase tracking-[0.07em] text-[#b07800] transition-all duration-700"
+            className="reveal mt-3 text-[clamp(1rem,2.5vw,1.4rem)] uppercase tracking-[0.07em] text-[#b07800] transition-all duration-700 min-h-[2.5rem]"
           >
-            Full-Stack Engineer for SaaS and MVP Delivery <span className="text-[#ffb000]">█</span>
+            {typedText} <span className="animate-pulse text-[#39ff14]">█</span>
           </h2>
           <p
             data-reveal
@@ -62,7 +70,7 @@ export function Hero() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-[var(--font-mono)] text-[0.7rem] uppercase tracking-[0.2em] text-[#b07800]">
+      <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-[var(--font-mono)] text-[0.7rem] uppercase tracking-[0.2em] text-[#b07800] z-20">
         scroll
         <span className="h-10 w-px bg-gradient-to-b from-[#b07800] to-transparent" />
       </div>

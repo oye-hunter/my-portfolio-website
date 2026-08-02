@@ -33,8 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${vt323.variable} ${shareTechMono.variable} ${courierPrime.variable} bg-[#0a0800] text-[#ffb000] antialiased overflow-x-hidden cursor-none selection:bg-[#ffb000]/20 selection:text-[#0a0800]`}
         style={{ fontFamily: "var(--font-body), monospace" }}
       >

@@ -2,20 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { About } from "@/components/About";
+import { BootScreen } from "@/components/BootScreen";
 import { Contact } from "@/components/Contact";
 import { Cursor } from "@/components/Cursor";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
+import { MatrixRain } from "@/components/MatrixRain";
 import { Nav } from "@/components/Nav";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
+import { TerminalModal } from "@/components/TerminalModal";
 
 const sectionIds = ["hero", "about", "projects", "experience", "skills", "contact"];
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isBooting, setIsBooting] = useState(true);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const cursor = document.getElementById("cursor");
 
     const moveCursor = (event: MouseEvent) => {
@@ -106,13 +118,25 @@ export default function Home() {
       skillObserver.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [mounted]);
 
   return (
     <>
+      {mounted && isBooting && <BootScreen onComplete={() => setIsBooting(false)} />}
       <Cursor />
-      <Nav activeSection={activeSection} />
-      <main className="relative isolate">
+      {mounted && <MatrixRain opacity={0.28} />}
+      <Nav
+        activeSection={activeSection}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+        onReboot={() => setIsBooting(true)}
+      />
+      <TerminalModal
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onReboot={() => setIsBooting(true)}
+      />
+
+      <main className="relative isolate z-10">
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-[998] bg-[linear-gradient(0deg,rgba(0,0,0,0.18)_0,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)]"
@@ -139,14 +163,16 @@ export default function Home() {
         <Skills />
         <Contact />
       </main>
+
       <a
-        className="fixed bottom-5 right-5 z-[10] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7"
+        className="fixed bottom-5 right-5 z-[10] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7 cursor-none"
         href="/resume.pdf"
         download="Muhammad-Hassan-Mughal-CV.pdf"
         aria-label="Download CV"
       >
         [ Download CV ]
       </a>
+
       <footer className="relative z-10 border-t border-dashed border-[#3a2a00] px-6 py-10 text-center font-[var(--font-mono)] text-[0.72rem] tracking-[0.15em] text-[#3a2a00] md:px-8 lg:px-12">
         <p>
           Engineered and designed by <strong className="text-[#b07800]">Muhammad Hassan Mughal</strong>
