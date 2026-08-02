@@ -94,6 +94,15 @@ html, body {
   }
 }
 
+@keyframes scanShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
 body {
   text-shadow:
     0 0 4px rgba(255, 176, 0, 0.2),
@@ -127,6 +136,33 @@ body {
 .crt-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #ffb000;
   box-shadow: 0 0 12px rgba(255, 176, 0, 0.8);
+}
+
+/* Tactile CRT Button Scanline Shimmer */
+.btn-crt-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-crt-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 208, 64, 0.35) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-crt-shimmer:hover::after {
+  animation: scanShimmer 0.75s ease-in-out;
 }
 
 .reveal {

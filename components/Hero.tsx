@@ -56,13 +56,13 @@ export function Hero() {
             className="reveal mt-10 flex flex-wrap justify-end gap-4 transition-all duration-700 max-md:justify-start"
           >
             <a
-              className="inline-flex items-center justify-center border border-[#ffb000] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline transition-colors duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)]"
+              className="btn-crt-shimmer inline-flex items-center justify-center border border-[#ffb000] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline transition-all duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)] active:scale-[0.97]"
               href="#projects"
             >
               View Projects
             </a>
             <a
-              className="inline-flex items-center justify-center border border-[#b07800] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#b07800] no-underline transition-colors duration-200 hover:bg-[#b07800] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.35)]"
+              className="btn-crt-shimmer inline-flex items-center justify-center border border-[#b07800] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.12em] text-[#b07800] no-underline transition-all duration-200 hover:bg-[#b07800] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.35)] active:scale-[0.97]"
               href="#contact"
             >
               Contact Me

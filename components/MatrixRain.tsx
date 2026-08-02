@@ -10,6 +10,10 @@ export function MatrixRain({ opacity = 0.25 }: MatrixRainProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Accessibility check: Skip canvas animation for users preferring reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -18,7 +22,7 @@ export function MatrixRain({ opacity = 0.25 }: MatrixRainProps) {
 
     let animationFrameId: number;
     let lastTime = 0;
-    const frameIntervalMs = 35; // Paced to ~18 FPS for a calmer, slower matrix fall speed
+    const frameIntervalMs = 55; // Paced to ~18 FPS (1000ms / 55ms = 18.18 FPS)
 
     const handleResize = () => {
       canvas.width = window.innerWidth;

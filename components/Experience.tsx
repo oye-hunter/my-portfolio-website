@@ -2,7 +2,7 @@ import { experience } from "./portfolio-data";
 
 export function Experience() {
   return (
-    <section id="experience" className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:px-8 lg:px-12">
+    <section id="experience" className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:px-8 lg:px-12 scroll-mt-24">
       <div className="mb-2 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.3em] text-[#b07800] before:content-['>_'] before:text-[#39ff14]">
         03 / Experience
       </div>

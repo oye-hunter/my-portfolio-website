@@ -2,7 +2,7 @@ import { identity } from "./portfolio-data";
 
 export function About() {
   return (
-    <section id="about" className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-8 lg:px-12">
+    <section id="about" className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-8 lg:px-12 scroll-mt-24">
       <div className="mb-2 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.3em] text-[#b07800] before:content-['>_'] before:text-[#39ff14]">
         01 / About
       </div>

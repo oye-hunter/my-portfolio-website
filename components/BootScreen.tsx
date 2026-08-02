@@ -60,6 +60,7 @@ export function BootScreen({ onComplete }: BootScreenProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault(); // Prevent page scroll on Spacebar keypress
         if (isReady) handleStart();
       }
     };

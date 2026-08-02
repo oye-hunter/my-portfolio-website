@@ -5,6 +5,7 @@ import { contact, projects } from "./portfolio-data";
 
 export function Projects() {
   const [filter, setFilter] = useState("ALL");
+  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
 
   // Dynamically extract top categories from actual project stack data
   const categories = useMemo(() => {
@@ -19,8 +20,28 @@ export function Projects() {
     );
   }, [filter]);
 
+  // 3D Perspective Tilt calculation on mouse move
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -6; // max 6deg tilt
+    const rotateY = ((x - centerX) / centerX) * 6;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+  };
+
   return (
-    <section id="projects" className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-8 lg:px-12">
+    <section id="projects" className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-8 lg:px-12 scroll-mt-24">
       <div className="mb-2 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.3em] text-[#b07800] before:content-['>_'] before:text-[#39ff14]">
         02 / Projects
       </div>
@@ -54,51 +75,70 @@ export function Projects() {
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filteredProjects.map((project) => (
-            <article
-              key={project.id}
-              className="group relative overflow-hidden border border-[#3a2a00] bg-[#0f0c00] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#b07800] hover:shadow-[0_0_25px_rgba(255,176,0,0.15)] animate-[crtFadeIn_0.35s_ease-out]"
-            >
-              <div className="absolute left-0 top-0 h-0 w-1 bg-[#ffb000] transition-all duration-300 group-hover:h-full" />
-              <div className="mb-2 font-[var(--font-display)] text-[3.5rem] leading-none text-[#3a2a00] group-hover:text-[#ffb000]/20 transition-colors">
-                {project.id}
-              </div>
-              <h3 className="mb-3 font-[var(--font-mono)] text-[1rem] uppercase tracking-[0.08em] text-[#ffb000]">
-                {project.name}
-              </h3>
-              <p className="mb-5 text-[0.9rem] leading-6 text-[#b07800]">{project.summary}</p>
+          {filteredProjects.map((project) => {
+            const isMatch = hoveredTech
+              ? project.stack.some((t) => t.toLowerCase() === hoveredTech.toLowerCase())
+              : false;
 
-              <div className="mb-6 flex flex-wrap gap-2">
-                {project.stack.map((tag) => (
-                  <span
-                    key={`${project.id}-${tag}`}
-                    className="border border-[#3a2a00] px-2.5 py-1 font-[var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] text-[#b07800]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            return (
+              <article
+                key={project.id}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                className={`group relative overflow-hidden border bg-[#0f0c00] p-7 transition-all duration-200 ease-out will-change-transform animate-[crtFadeIn_0.35s_ease-out] ${
+                  isMatch
+                    ? "border-[#39ff14] shadow-[0_0_30px_rgba(57,255,20,0.3)] bg-[#39ff14]/5"
+                    : "border-[#3a2a00] hover:border-[#ffb000] hover:shadow-[0_0_30px_rgba(255,176,0,0.2)]"
+                }`}
+              >
+                <div className="absolute left-0 top-0 h-0 w-1 bg-[#ffb000] transition-all duration-300 group-hover:h-full" />
+                <div className="mb-2 font-[var(--font-display)] text-[3.5rem] leading-none text-[#3a2a00] group-hover:text-[#ffb000]/25 transition-colors">
+                  {project.id}
+                </div>
+                <h3 className="mb-3 font-[var(--font-mono)] text-[1.05rem] uppercase tracking-[0.08em] text-[#ffb000]">
+                  {project.name}
+                </h3>
+                <p className="mb-5 text-[0.9rem] leading-6 text-[#b07800]">{project.summary}</p>
 
-              <div className="flex flex-wrap gap-4 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800]">
-                <a
-                  className="border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-none"
-                  href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
-                >
-                  Live Demo Request
-                </a>
-                {project.githubUrl ? (
+                {/* Tech Tags with Interactive Cross-Highlight */}
+                <div className="mb-6 flex flex-wrap gap-2">
+                  {project.stack.map((tag) => (
+                    <span
+                      key={`${project.id}-${tag}`}
+                      onMouseEnter={() => setHoveredTech(tag)}
+                      onMouseLeave={() => setHoveredTech(null)}
+                      className={`border px-2.5 py-1 font-[var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] transition-all duration-150 ${
+                        hoveredTech && tag.toLowerCase() === hoveredTech.toLowerCase()
+                          ? "border-[#39ff14] bg-[#39ff14] text-[#0a0800] font-bold shadow-[0_0_10px_#39ff14]"
+                          : "border-[#3a2a00] text-[#b07800] hover:border-[#ffb000] hover:text-[#ffb000]"
+                      }`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-4 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800]">
                   <a
                     className="border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-none"
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
                   >
-                    GitHub
+                    Live Demo Request
                   </a>
-                ) : null}
-              </div>
-            </article>
-          ))}
+                  {project.githubUrl ? (
+                    <a
+                      className="border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-none"
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
     </section>

@@ -157,6 +157,9 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="CRT Interactive Terminal"
       className="fixed inset-0 z-[1100] flex items-center justify-center bg-[#0a0800]/85 backdrop-blur-md p-4 animate-[crtFadeIn_0.2s_ease-out]"
       onClick={onClose}
     >
@@ -172,6 +175,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
           </div>
           <button
             onClick={onClose}
+            aria-label="Close Terminal"
             className="font-[var(--font-mono)] text-xs uppercase tracking-widest text-[#b07800] transition-colors hover:text-[#ffb000]"
           >
             [ ESC / CLOSE ]
@@ -203,6 +207,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="type command (e.g. help, reboot, projects)..."
+            aria-label="Terminal command input"
             className="w-full bg-transparent font-[var(--font-mono)] text-[0.85rem] text-[#ffb000] outline-none placeholder:text-[#3a2a00]"
           />
           <span className="animate-pulse text-[#39ff14] text-xs">█</span>

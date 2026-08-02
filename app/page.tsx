@@ -31,24 +31,30 @@ export default function Home() {
     const cursor = document.getElementById("cursor");
 
     const moveCursor = (event: MouseEvent) => {
-      if (!cursor) {
-        return;
-      }
-
+      if (!cursor) return;
       cursor.style.left = `${event.clientX}px`;
       cursor.style.top = `${event.clientY}px`;
     };
 
     document.addEventListener("mousemove", moveCursor);
 
-    const interactiveNodes = document.querySelectorAll("a, button, input, textarea");
-    const onEnter = () => cursor?.classList.add("w-9", "h-9", "opacity-60");
-    const onLeave = () => cursor?.classList.remove("w-9", "h-9", "opacity-60");
+    // Global event delegation for custom cursor scaling on interactive elements (including dynamically rendered ones)
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button, input, textarea")) {
+        cursor?.classList.add("w-9", "h-9", "opacity-60");
+      }
+    };
 
-    interactiveNodes.forEach((node) => {
-      node.addEventListener("mouseenter", onEnter);
-      node.addEventListener("mouseleave", onLeave);
-    });
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button, input, textarea")) {
+        cursor?.classList.remove("w-9", "h-9", "opacity-60");
+      }
+    };
+
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
 
     const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     revealNodes.forEach((node, index) => {
@@ -108,11 +114,8 @@ export default function Home() {
 
     return () => {
       document.removeEventListener("mousemove", moveCursor);
-
-      interactiveNodes.forEach((node) => {
-        node.removeEventListener("mouseenter", onEnter);
-        node.removeEventListener("mouseleave", onLeave);
-      });
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
 
       revealObserver.disconnect();
       skillObserver.disconnect();
