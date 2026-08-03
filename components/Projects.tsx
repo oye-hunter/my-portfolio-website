@@ -1,11 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { contact, projects } from "./portfolio-data";
+import { contact, Project, projects } from "./portfolio-data";
+import { ProjectModal } from "./ProjectModal";
 
 export function Projects() {
   const [filter, setFilter] = useState("ALL");
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Dynamically extract top categories from actual project stack data
   const categories = useMemo(() => {
@@ -85,9 +87,10 @@ export function Projects() {
             return (
               <article
                 key={project.id}
+                onClick={() => setSelectedProject(project)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className={`group relative overflow-hidden border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-200 ease-out will-change-transform animate-[crtFadeIn_0.35s_ease-out] ${
+                className={`group relative overflow-hidden border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-200 ease-out will-change-transform animate-[crtFadeIn_0.35s_ease-out] cursor-pointer md:cursor-none ${
                   isMatch
                     ? "border-[#39ff14] shadow-[0_0_30px_rgba(57,255,20,0.3)] bg-[#39ff14]/5"
                     : "border-[#3a2a00] hover:border-[#ffb000] hover:shadow-[0_0_30px_rgba(255,176,0,0.2)]"
@@ -120,29 +123,48 @@ export function Projects() {
                   ))}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800]">
-                  <a
-                    className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
-                    href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
+                <div className="flex flex-wrap items-center justify-between gap-3 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800]">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProject(project);
+                    }}
+                    className="inline-flex min-h-[44px] items-center border border-[#ffb000] bg-[#ffb000]/10 px-3 py-1.5 text-[0.72rem] text-[#ffb000] transition-colors duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] cursor-pointer md:cursor-none"
                   >
-                    Live Demo Request
-                  </a>
-                  {project.githubUrl ? (
+                    [ CASE STUDY ]
+                  </button>
+                  <div className="flex items-center gap-3">
                     <a
                       className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
+                      href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      GitHub
+                      Demo
                     </a>
-                  ) : null}
+                    {project.githubUrl ? (
+                      <a
+                        className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        GitHub
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
               </article>
             );
           })}
         </div>
       )}
+
+      {/* Case Study Modal Dialog */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }

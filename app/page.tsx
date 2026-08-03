@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || isBooting) return;
 
     const cursor = document.getElementById("cursor");
 
@@ -121,11 +121,19 @@ export default function Home() {
       skillObserver.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [mounted]);
+  }, [mounted, isBooting]);
+
+  if (mounted && isBooting) {
+    return (
+      <main className="relative min-h-screen bg-[#0a0800]">
+        <Cursor />
+        <BootScreen onComplete={() => setIsBooting(false)} />
+      </main>
+    );
+  }
 
   return (
-    <>
-      {mounted && isBooting && <BootScreen onComplete={() => setIsBooting(false)} />}
+    <div className="animate-[crtFadeIn_0.4s_ease-out]">
       <Cursor />
       {mounted && <MatrixRain opacity={0.28} />}
       <Nav
@@ -187,6 +195,6 @@ export default function Home() {
         </p>
         <p>Built with Next.js, TypeScript, and a Tailwind-driven CRT interface system.</p>
       </footer>
-    </>
+    </div>
   );
 }
