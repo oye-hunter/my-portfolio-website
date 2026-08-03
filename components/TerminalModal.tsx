@@ -105,7 +105,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 py-1">
             {skills.map((group) => (
               <div key={group.title} className="border border-[#3a2a00] p-2 bg-[#0a0800]">
-                <p className="text-[#39ff14] text-xs font-bold">// {group.title}</p>
+                <p className="text-[#39ff14] text-xs font-bold">{`// ${group.title}`}</p>
                 <p className="text-xs text-[#b07800] mt-1">{group.items.map((i) => i.label).join(" • ")}</p>
               </div>
             ))}
@@ -155,35 +155,37 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
     setInput("");
   };
 
+  const quickCommands = ["help", "about", "projects", "skills", "contact", "clear", "exit"];
+
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="CRT Interactive Terminal"
-      className="fixed inset-0 z-[1100] flex items-center justify-center bg-[#0a0800]/85 backdrop-blur-md p-4 animate-[crtFadeIn_0.2s_ease-out]"
+      className="fixed inset-0 z-[1100] flex items-center justify-center bg-[#0a0800]/88 backdrop-blur-md p-2.5 sm:p-4 md:p-6 animate-[crtFadeIn_0.2s_ease-out]"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl border-2 border-[#b07800] bg-[#0f0c00] p-6 shadow-[0_0_35px_rgba(255,176,0,0.35)]"
+        className="relative w-full max-w-3xl border-2 border-[#b07800] bg-[#0f0c00] p-4 sm:p-6 shadow-[0_0_35px_rgba(255,176,0,0.35)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Terminal Header */}
-        <div className="mb-4 flex items-center justify-between border-b border-[#3a2a00] pb-3">
-          <div className="font-[var(--font-mono)] text-xs tracking-[0.2em] text-[#39ff14] flex items-center gap-2">
-            <span>● ● ● CRT_INTERACTIVE_TERMINAL</span>
-            <span className="animate-pulse text-[0.65rem] bg-[#39ff14]/10 border border-[#39ff14] px-1.5 py-0.5">READY</span>
+        <div className="mb-3 sm:mb-4 flex items-center justify-between border-b border-[#3a2a00] pb-2 sm:pb-3">
+          <div className="font-[var(--font-mono)] text-[0.7rem] sm:text-xs tracking-[0.2em] text-[#39ff14] flex items-center gap-2">
+            <span>● ● ● CRT_TERMINAL</span>
+            <span className="animate-pulse text-[0.6rem] sm:text-[0.65rem] bg-[#39ff14]/10 border border-[#39ff14] px-1.5 py-0.5">READY</span>
           </div>
           <button
             onClick={onClose}
             aria-label="Close Terminal"
-            className="font-[var(--font-mono)] text-xs uppercase tracking-widest text-[#b07800] transition-colors hover:text-[#ffb000]"
+            className="font-[var(--font-mono)] text-[0.7rem] sm:text-xs uppercase tracking-widest text-[#b07800] transition-colors hover:text-[#ffb000] min-h-[38px] px-2"
           >
             [ ESC / CLOSE ]
           </button>
         </div>
 
         {/* Refined Terminal Output Box with CRT Styled Scrollbar */}
-        <div className="crt-scrollbar max-h-[50vh] overflow-y-auto pr-3 space-y-3 font-[var(--font-mono)] text-[0.85rem]">
+        <div className="crt-scrollbar max-h-[45vh] sm:max-h-[50vh] overflow-y-auto pr-2 space-y-3 font-[var(--font-mono)] text-[0.8rem] sm:text-[0.85rem]">
           {history.map((entry, idx) => (
             <div key={idx} className="space-y-1">
               {entry.command && (
@@ -192,23 +194,36 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
                   <span className="text-[#ffb000]">{entry.command}</span>
                 </div>
               )}
-              {entry.output && <div className="pl-4">{entry.output}</div>}
+              {entry.output && <div className="pl-3 sm:pl-4">{entry.output}</div>}
             </div>
           ))}
           <div ref={bottomRef} />
         </div>
 
+        {/* Mobile Quick Action Command Pills */}
+        <div className="mt-3 flex overflow-x-auto crt-scrollbar gap-1.5 pt-1 pb-1">
+          {quickCommands.map((cmd) => (
+            <button
+              key={cmd}
+              onClick={() => handleCommand(cmd)}
+              className="shrink-0 border border-[#3a2a00] bg-[#0a0800] px-2.5 py-1 font-[var(--font-mono)] text-[0.68rem] uppercase tracking-wider text-[#b07800] active:border-[#39ff14] active:text-[#39ff14] min-h-[36px] flex items-center justify-center cursor-pointer md:cursor-none"
+            >
+              [{cmd}]
+            </button>
+          ))}
+        </div>
+
         {/* Command Line Input */}
-        <form onSubmit={handleSubmit} className="mt-4 flex items-center gap-2 border-t border-[#3a2a00] pt-3">
+        <form onSubmit={handleSubmit} className="mt-2 flex items-center gap-2 border-t border-[#3a2a00] pt-3">
           <span className="text-[#39ff14] font-bold text-sm">$</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="type command (e.g. help, reboot, projects)..."
+            placeholder="type command (e.g. help, projects)..."
             aria-label="Terminal command input"
-            className="w-full bg-transparent font-[var(--font-mono)] text-[0.85rem] text-[#ffb000] outline-none placeholder:text-[#3a2a00]"
+            className="w-full bg-transparent font-[var(--font-mono)] text-[1rem] sm:text-[0.85rem] text-[#ffb000] outline-none placeholder:text-[#3a2a00] min-h-[40px] cursor-pointer md:cursor-none"
           />
           <span className="animate-pulse text-[#39ff14] text-xs">█</span>
         </form>

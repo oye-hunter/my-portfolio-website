@@ -12,14 +12,31 @@
   --scanline: rgba(0, 0, 0, 0.18);
 }
 
-html, body {
-  scroll-behavior: smooth;
-  cursor: none !important;
+/* Restrict hidden system cursor to desktop mouse/pointer devices only */
+@media (pointer: fine) {
+  html, body {
+    cursor: none !important;
+  }
+
+  *, *::before, *::after, a, button, input, textarea, select {
+    cursor: none !important;
+  }
 }
 
-/* Force hidden system cursor on all interactive elements */
-*, *::before, *::after, a, button, input, textarea, select {
-  cursor: none !important;
+/* Touch screen interaction optimizations */
+@media (pointer: coarse) {
+  html, body, *, *::before, *::after, a, button, input, textarea, select {
+    cursor: auto !important;
+  }
+  
+  a, button {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: rgba(255, 176, 0, 0.15);
+  }
+
+  input, textarea {
+    cursor: text !important;
+  }
 }
 
 @keyframes scanMove {
@@ -116,24 +133,29 @@ body {
   }
 }
 
-/* Custom Retro CRT Amber Scrollbar */
-.crt-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Custom Global Retro CRT Amber Scrollbar (Matches CLI terminal scroll) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #b07800 #0f0c00;
 }
 
-.crt-scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: #0f0c00;
-  border: 1px solid #3a2a00;
+  border-left: 1px solid #3a2a00;
 }
 
-.crt-scrollbar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #b07800;
   border-radius: 0px;
   box-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
 }
 
-.crt-scrollbar::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: #ffb000;
   box-shadow: 0 0 12px rgba(255, 176, 0, 0.8);
 }

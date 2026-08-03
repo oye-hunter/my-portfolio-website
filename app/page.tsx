@@ -140,6 +140,11 @@ export default function Home() {
       />
 
       <main className="relative isolate z-10">
+        {/* Fixed Vintage Dark CRT Vignette Overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[997] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,8,0,0.85)_100%)]"
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 z-[998] bg-[linear-gradient(0deg,rgba(0,0,0,0.18)_0,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)]"
@@ -168,7 +173,7 @@ export default function Home() {
       </main>
 
       <a
-        className="fixed bottom-5 right-5 z-[10] border border-[#b07800] bg-[#0f0c00]/90 px-4 py-2 font-[var(--font-mono)] text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] md:bottom-7 md:right-7 cursor-none"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10] border border-[#b07800] bg-[#0f0c00]/95 px-3.5 sm:px-4 py-2.5 font-[var(--font-mono)] text-[0.7rem] sm:text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] cursor-pointer md:cursor-none min-h-[44px] inline-flex items-center"
         href="/resume.pdf"
         download="Muhammad-Hassan-Mughal-CV.pdf"
         aria-label="Download CV"

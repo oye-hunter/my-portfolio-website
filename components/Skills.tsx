@@ -55,20 +55,20 @@ export function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:px-8 lg:px-12 scroll-mt-24"
+      className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 md:px-8 lg:px-12 scroll-mt-20"
     >
-      <div className="mb-2 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.3em] text-[#b07800] before:content-['>_'] before:text-[#39ff14]">
+      <div className="mb-2 font-[var(--font-mono)] text-[0.72rem] sm:text-[0.75rem] uppercase tracking-[0.3em] text-[#b07800] before:content-['>_'] before:text-[#39ff14]">
         04 / Skills
       </div>
-      <h2 className="mb-12 font-[var(--font-display)] text-[clamp(2.5rem,5vw,4rem)] leading-none tracking-[0.06em] text-[#ffb000] drop-shadow-[0_0_20px_rgba(255,208,64,0.5)]">
+      <h2 className="mb-8 sm:mb-12 font-[var(--font-display)] text-[clamp(2.2rem,6vw,4rem)] leading-none tracking-[0.06em] text-[#ffb000] drop-shadow-[0_0_20px_rgba(255,208,64,0.5)]">
         TECH STACK
       </h2>
-      <hr className="mb-12 border-t border-dashed border-[#3a2a00]" />
+      <hr className="mb-8 sm:mb-12 border-t border-dashed border-[#3a2a00]" />
 
-      <div className="grid gap-10 lg:grid-cols-2">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-2">
         {skills.map((group) => (
           <div key={group.title} data-skill-group data-reveal className="reveal">
-            <h3 className="mb-6 border-b border-[#3a2a00] pb-2 font-[var(--font-mono)] text-[0.78rem] uppercase tracking-[0.25em] text-[#39ff14]">
+            <h3 className="mb-4 sm:mb-6 border-b border-[#3a2a00] pb-2 font-[var(--font-mono)] text-[0.75rem] sm:text-[0.78rem] uppercase tracking-[0.25em] text-[#39ff14]">
               {`// ${group.title}`}
             </h3>
             {group.items.map((item) => {
