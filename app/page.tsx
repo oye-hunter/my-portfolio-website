@@ -165,14 +165,14 @@ export default function Home() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 right-0 top-[100vh] bottom-0 z-0"
+          className="pointer-events-none absolute left-0 right-0 top-0 bottom-0 z-0"
           style={{
             backgroundImage:
               "linear-gradient(rgba(58, 42, 0, 0.34) 1px, transparent 1px), linear-gradient(90deg, rgba(58, 42, 0, 0.34) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
-        <Hero />
+        <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
         <About />
         <Projects />
         <Experience />
