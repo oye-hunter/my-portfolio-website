@@ -1,102 +1,199 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import { About } from "@/components/About";
+import { BootScreen } from "@/components/BootScreen";
+import { Contact } from "@/components/Contact";
+import { Cursor } from "@/components/Cursor";
+import { Experience } from "@/components/Experience";
+import { Hero } from "@/components/Hero";
+import { MatrixRain } from "@/components/MatrixRain";
+import { Nav } from "@/components/Nav";
+import { Projects } from "@/components/Projects";
+import { Skills } from "@/components/Skills";
+import { TerminalModal } from "@/components/TerminalModal";
+
+const sectionIds = ["hero", "about", "projects", "experience", "skills", "contact"];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [mounted, setMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isBooting, setIsBooting] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || isBooting) return;
+
+    const cursor = document.getElementById("cursor");
+
+    const moveCursor = (event: MouseEvent) => {
+      if (!cursor) return;
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+    };
+
+    document.addEventListener("mousemove", moveCursor);
+
+    // Global event delegation for custom cursor scaling on interactive elements (including dynamically rendered ones)
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button, input, textarea")) {
+        cursor?.classList.add("w-9", "h-9", "opacity-60");
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button, input, textarea")) {
+        cursor?.classList.remove("w-9", "h-9", "opacity-60");
+      }
+    };
+
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
+
+    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    revealNodes.forEach((node, index) => {
+      node.style.transitionDelay = `${index * 80}ms`;
+    });
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    revealNodes.forEach((node) => revealObserver.observe(node));
+
+    const skillObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll<HTMLElement>("[data-skill-fill]").forEach((fill) => {
+              const width = fill.dataset.width;
+
+              if (width) {
+                fill.style.width = width;
+              }
+            });
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    const skillGroups = document.querySelectorAll("[data-skill-group]");
+    skillGroups.forEach((group) => skillObserver.observe(group));
+
+    const handleScroll = () => {
+      const current = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((section): section is HTMLElement => Boolean(section))
+        .reduce((active, section) => {
+          if (window.scrollY >= section.offsetTop - 220) {
+            return section.id;
+          }
+
+          return active;
+        }, "hero");
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      document.removeEventListener("mousemove", moveCursor);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
+
+      revealObserver.disconnect();
+      skillObserver.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [mounted, isBooting]);
+
+  if (isBooting) {
+    return (
+      <main className="relative min-h-screen bg-[#0a0800]">
+        <Cursor />
+        <BootScreen onComplete={() => setIsBooting(false)} />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+    );
+  }
+
+  return (
+    <div className="animate-[crtFadeIn_0.4s_ease-out]">
+      <Cursor />
+      {mounted && <MatrixRain opacity={0.28} />}
+      <Nav
+        activeSection={activeSection}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+        onReboot={() => setIsBooting(true)}
+      />
+      <TerminalModal
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onReboot={() => setIsBooting(true)}
+      />
+
+      <main className="relative isolate z-10">
+        {/* Fixed Vintage Dark CRT Vignette Overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[997] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,8,0,0.85)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[998] bg-[linear-gradient(0deg,rgba(0,0,0,0.18)_0,rgba(0,0,0,0.18)_1px,transparent_1px,transparent_3px)]"
+          style={{ animation: "scanMove 8s linear infinite" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-[999] bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.55)_100%)]"
+          style={{ animation: "flicker 0.15s infinite" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 right-0 top-[100vh] bottom-0 z-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(58, 42, 0, 0.34) 1px, transparent 1px), linear-gradient(90deg, rgba(58, 42, 0, 0.34) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Skills />
+        <Contact />
+      </main>
+
+      <a
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10] border border-[#b07800] bg-[#0f0c00]/95 px-3.5 sm:px-4 py-2.5 font-[var(--font-mono)] text-[0.7rem] sm:text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] cursor-pointer md:cursor-none min-h-[44px] inline-flex items-center"
+        href="/resume.pdf"
+        download="Muhammad-Hassan-Mughal-CV.pdf"
+        aria-label="Download CV"
+      >
+        [ Download CV ]
+      </a>
+
+      <footer className="relative z-10 border-t border-dashed border-[#3a2a00] px-6 py-10 text-center font-[var(--font-mono)] text-[0.72rem] tracking-[0.15em] text-[#3a2a00] md:px-8 lg:px-12">
+        <p>
+          Engineered and designed by <strong className="text-[#b07800]">Muhammad Hassan Mughal</strong>
+        </p>
+        <p>Built with Next.js, TypeScript, and a Tailwind-driven CRT interface system.</p>
       </footer>
     </div>
   );

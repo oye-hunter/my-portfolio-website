@@ -1,26 +1,240 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --amber: #ffb000;
+  --amber-dim: #b07800;
+  --amber-glow: #ffd04080;
+  --amber-faint: #3a2a00;
+  --bg: #0a0800;
+  --bg-panel: #0f0c00;
+  --green: #39ff14;
+  --red: #ff4444;
+  --scanline: rgba(0, 0, 0, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Restrict hidden system cursor to desktop mouse/pointer devices only */
+@media (pointer: fine) {
+  html, body {
+    cursor: none !important;
+  }
+
+  *, *::before, *::after, a, button, input, textarea, select {
+    cursor: none !important;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Touch screen interaction optimizations */
+@media (pointer: coarse) {
+  html, body, *, *::before, *::after, a, button, input, textarea, select {
+    cursor: auto !important;
+  }
+  
+  a, button {
+    cursor: pointer !important;
+    -webkit-tap-highlight-color: rgba(255, 176, 0, 0.15);
+  }
+
+  input, textarea {
+    cursor: text !important;
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 300px;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.97;
+  }
+  94% {
+    opacity: 0.93;
+  }
+  96% {
+    opacity: 0.98;
+  }
+}
+
+@keyframes textPhosphor {
+  0%,
+  100% {
+    text-shadow:
+      0 0 4px rgba(255, 176, 0, 0.2),
+      0 0 10px rgba(255, 208, 64, 0.12);
+  }
+  50% {
+    text-shadow:
+      0 0 6px rgba(255, 176, 0, 0.28),
+      0 0 14px rgba(255, 208, 64, 0.18);
+  }
+}
+
+@keyframes textGlitch {
+  0%,
+  89%,
+  100% {
+    text-shadow:
+      0 0 4px rgba(255, 176, 0, 0.2),
+      0 0 10px rgba(255, 208, 64, 0.12);
+  }
+  90% {
+    text-shadow:
+      0 0 5px rgba(255, 176, 0, 0.26),
+      -0.6px 0 0 rgba(57, 255, 20, 0.22),
+      0.6px 0 0 rgba(255, 176, 0, 0.22);
+  }
+  91% {
+    text-shadow:
+      0 0 5px rgba(255, 176, 0, 0.26),
+      0.8px 0 0 rgba(57, 255, 20, 0.2),
+      -0.8px 0 0 rgba(255, 176, 0, 0.2);
+  }
+}
+
+@keyframes crtFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scanShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  text-shadow:
+    0 0 4px rgba(255, 176, 0, 0.2),
+    0 0 10px rgba(255, 208, 64, 0.12);
+  animation: textPhosphor 3.2s ease-in-out infinite, textGlitch 7.5s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+}
+
+/* Custom Global Retro CRT Amber Scrollbar (Matches CLI terminal scroll) */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #b07800 #0f0c00;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0c00;
+  border-left: 1px solid #3a2a00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b07800;
+  border-radius: 0px;
+  box-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffb000;
+  box-shadow: 0 0 12px rgba(255, 176, 0, 0.8);
+}
+
+/* Tactile CRT Button Scanline Shimmer */
+.btn-crt-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-crt-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 208, 64, 0.35) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-crt-shimmer:hover::after {
+  animation: scanShimmer 0.75s ease-in-out;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fallback mapping for arbitrary Tailwind font classes. */
+[class*="font-[var(--font-display)]"] {
+  font-family: var(--font-display), monospace !important;
+}
+
+[class*="font-[var(--font-mono)]"] {
+  font-family: var(--font-mono), monospace !important;
+}
+
+[class*="font-[var(--font-body)]"] {
+  font-family: var(--font-body), monospace !important;
+}
+
+/* Animated Timeline Phosphor Laser Beam & Node Glow */
+.timeline-laser {
+  background: linear-gradient(180deg, #39ff14 0%, #ffb000 100%);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.75);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.timeline-card {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card.is-active {
+  opacity: 1;
+  transform: translateX(0);
+  border-color: #ffb000;
+  box-shadow: 0 0 25px rgba(255, 176, 0, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
