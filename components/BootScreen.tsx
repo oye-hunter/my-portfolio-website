@@ -68,8 +68,6 @@ export function BootScreen({ onComplete }: BootScreenProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isReady, handleStart]);
 
-  if (!mounted) return null;
-
   return (
     <div
       className={`fixed inset-0 z-[2000] flex flex-col justify-between bg-[#0a0800] p-4 sm:p-6 md:p-12 font-[var(--font-mono)] text-[#ffb000] cursor-pointer md:cursor-none transition-all duration-500 ${

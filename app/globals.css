@@ -210,3 +210,31 @@ html {
 [class*="font-[var(--font-body)]"] {
   font-family: var(--font-body), monospace !important;
 }
+
+/* Animated Timeline Phosphor Laser Beam & Node Glow */
+.timeline-laser {
+  background: linear-gradient(180deg, #39ff14 0%, #ffb000 100%);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.75);
+  transform-origin: top;
+  will-change: transform;
+}
+
+.timeline-card {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card.is-active {
+  opacity: 1;
+  transform: translateX(0);
+  border-color: #ffb000;
+  box-shadow: 0 0 25px rgba(255, 176, 0, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -123,7 +123,7 @@ export default function Home() {
     };
   }, [mounted, isBooting]);
 
-  if (mounted && isBooting) {
+  if (isBooting) {
     return (
       <main className="relative min-h-screen bg-[#0a0800]">
         <Cursor />
