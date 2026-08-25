@@ -36,11 +36,17 @@ export function Contact() {
       <div className="grid gap-8 sm:gap-12 lg:grid-cols-2">
         <div data-reveal className="reveal">
           <p className="mb-6 sm:mb-8 text-[0.95rem] sm:text-[1rem] leading-relaxed text-[#b07800]">
-            If you are building a SaaS product, validating an MVP, or scaling an existing system, I can
-            contribute across architecture, implementation, and delivery.
+            If you are building a SaaS product, integrating AI agent workflows, validating an MVP, or scaling an existing system, I can
+            contribute across architecture, full-stack implementation, and production delivery.
           </p>
 
           <div className="flex flex-col gap-3">
+            <a
+              className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none break-all"
+              href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}
+            >
+              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">#</span> {contact.phone}
+            </a>
             <a
               className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none break-all"
               href={`mailto:${contact.email}`}
@@ -66,9 +72,9 @@ export function Contact() {
             <a
               className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none"
               href={contact.resume}
-              download
+              download="Muhammad-Hassan-Mughal-CV.pdf"
             >
-              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">↓</span> Download Resume
+              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">↓</span> Download Resume (PDF)
             </a>
           </div>
         </div>

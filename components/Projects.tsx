@@ -9,16 +9,34 @@ export function Projects() {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // Dynamically extract top categories from actual project stack data
+  // Curated category filter tags covering the full breadth of resume projects
   const categories = useMemo(() => {
-    const popularTechs = ["ALL", "Next.js", "React Native", "Supabase", "Stripe", "TypeScript", "Node.js"];
-    return popularTechs;
+    return ["ALL", "AI / LLM", "Next.js", "React Native", "Supabase", "Stripe", "GraphQL", "NeonDB / Drizzle"];
   }, []);
 
   const filteredProjects = useMemo(() => {
     if (filter === "ALL") return projects;
+    
+    if (filter === "AI / LLM") {
+      return projects.filter((p) =>
+        p.stack.some((tech) => {
+          const t = tech.toLowerCase();
+          return t.includes("ai") || t.includes("gemini") || t.includes("groq") || t.includes("openai") || t.includes("knn");
+        })
+      );
+    }
+
+    if (filter === "NeonDB / Drizzle") {
+      return projects.filter((p) =>
+        p.stack.some((tech) => {
+          const t = tech.toLowerCase();
+          return t.includes("neondb") || t.includes("drizzle") || t.includes("neon");
+        })
+      );
+    }
+
     return projects.filter((p) =>
-      p.stack.some((tech) => tech.toLowerCase().includes(filter.toLowerCase())),
+      p.stack.some((tech) => tech.toLowerCase().includes(filter.toLowerCase()))
     );
   }, [filter]);
 
@@ -50,7 +68,7 @@ export function Projects() {
         02 / Projects
       </div>
       <h2 className="mb-6 sm:mb-8 font-[var(--font-display)] text-[clamp(2.2rem,6vw,4rem)] leading-none tracking-[0.06em] text-[#ffb000] drop-shadow-[0_0_20px_rgba(255,208,64,0.5)]">
-        SELECTED WORK
+        SELECTED WORK ({projects.length})
       </h2>
 
       {/* Filter Tabs - Horizontal scrollable pills on mobile */}
@@ -90,40 +108,42 @@ export function Projects() {
                 onClick={() => setSelectedProject(project)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className={`group relative overflow-hidden border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-200 ease-out will-change-transform animate-[crtFadeIn_0.35s_ease-out] cursor-pointer md:cursor-none ${
+                className={`group relative overflow-hidden border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-200 ease-out will-change-transform animate-[crtFadeIn_0.35s_ease-out] cursor-pointer md:cursor-none flex flex-col justify-between ${
                   isMatch
                     ? "border-[#39ff14] shadow-[0_0_30px_rgba(57,255,20,0.3)] bg-[#39ff14]/5"
                     : "border-[#3a2a00] hover:border-[#ffb000] hover:shadow-[0_0_30px_rgba(255,176,0,0.2)]"
                 }`}
               >
-                <div className="absolute left-0 top-0 h-0 w-1 bg-[#ffb000] transition-all duration-300 group-hover:h-full" />
-                <div className="mb-2 font-[var(--font-display)] text-[2.8rem] sm:text-[3.5rem] leading-none text-[#3a2a00] group-hover:text-[#ffb000]/25 transition-colors">
-                  {project.id}
-                </div>
-                <h3 className="mb-3 font-[var(--font-mono)] text-[1rem] sm:text-[1.05rem] uppercase tracking-[0.08em] text-[#ffb000]">
-                  {project.name}
-                </h3>
-                <p className="mb-5 text-[0.88rem] sm:text-[0.9rem] leading-relaxed text-[#b07800]">{project.summary}</p>
+                <div>
+                  <div className="absolute left-0 top-0 h-0 w-1 bg-[#ffb000] transition-all duration-300 group-hover:h-full" />
+                  <div className="mb-2 font-[var(--font-display)] text-[2.8rem] sm:text-[3.5rem] leading-none text-[#3a2a00] group-hover:text-[#ffb000]/25 transition-colors">
+                    {project.id}
+                  </div>
+                  <h3 className="mb-3 font-[var(--font-mono)] text-[1rem] sm:text-[1.05rem] uppercase tracking-[0.08em] text-[#ffb000]">
+                    {project.name}
+                  </h3>
+                  <p className="mb-5 text-[0.88rem] sm:text-[0.9rem] leading-relaxed text-[#b07800]">{project.summary}</p>
 
-                {/* Tech Tags with Interactive Cross-Highlight */}
-                <div className="mb-6 flex flex-wrap gap-2">
-                  {project.stack.map((tag) => (
-                    <span
-                      key={`${project.id}-${tag}`}
-                      onMouseEnter={() => setHoveredTech(tag)}
-                      onMouseLeave={() => setHoveredTech(null)}
-                      className={`border px-2.5 py-1 font-[var(--font-mono)] text-[0.68rem] sm:text-[0.7rem] uppercase tracking-[0.08em] transition-all duration-150 ${
-                        hoveredTech && tag.toLowerCase() === hoveredTech.toLowerCase()
-                          ? "border-[#39ff14] bg-[#39ff14] text-[#0a0800] font-bold shadow-[0_0_10px_#39ff14]"
-                          : "border-[#3a2a00] text-[#b07800] hover:border-[#ffb000] hover:text-[#ffb000]"
-                      }`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {/* Tech Tags with Interactive Cross-Highlight */}
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {project.stack.map((tag) => (
+                      <span
+                        key={`${project.id}-${tag}`}
+                        onMouseEnter={() => setHoveredTech(tag)}
+                        onMouseLeave={() => setHoveredTech(null)}
+                        className={`border px-2.5 py-1 font-[var(--font-mono)] text-[0.68rem] sm:text-[0.7rem] uppercase tracking-[0.08em] transition-all duration-150 ${
+                          hoveredTech && tag.toLowerCase() === hoveredTech.toLowerCase()
+                            ? "border-[#39ff14] bg-[#39ff14] text-[#0a0800] font-bold shadow-[0_0_10px_#39ff14]"
+                            : "border-[#3a2a00] text-[#b07800] hover:border-[#ffb000] hover:text-[#ffb000]"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800]">
+                <div className="flex flex-wrap items-center justify-between gap-3 font-[var(--font-mono)] text-[0.75rem] uppercase tracking-[0.1em] text-[#b07800] border-t border-[#3a2a00]/60 pt-4 mt-auto">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();

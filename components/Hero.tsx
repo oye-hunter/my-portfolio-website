@@ -8,9 +8,10 @@ type HeroProps = {
 };
 
 const TYPEWRITER_PHRASES = [
-  "Full-Stack Engineer for SaaS & MVP Delivery",
-  "Architecting Scalable Next.js & React Native Systems",
-  "Building Production Infrastructure & .NET Core Backend APIs",
+  "Full-Stack Engineer for Scalable SaaS & AI Applications",
+  "Architecting AI Agent Pipelines (Groq & Gemini LLMs)",
+  "Building Next.js 16, React Native & .NET Core Backend Systems",
+  "Optimizing Large-Scale TanStack Tables & Real-Time Data Streams",
 ];
 
 export function Hero({ onOpenTerminal }: HeroProps) {
@@ -25,7 +26,7 @@ export function Hero({ onOpenTerminal }: HeroProps) {
     if (!isDeleting && typedText.length < currentPhrase.length) {
       timer = setTimeout(() => {
         setTypedText(currentPhrase.slice(0, typedText.length + 1));
-      }, 40);
+      }, 35);
     } else if (!isDeleting && typedText.length === currentPhrase.length) {
       timer = setTimeout(() => {
         setIsDeleting(true);
@@ -33,7 +34,7 @@ export function Hero({ onOpenTerminal }: HeroProps) {
     } else if (isDeleting && typedText.length > 0) {
       timer = setTimeout(() => {
         setTypedText(currentPhrase.slice(0, typedText.length - 1));
-      }, 20);
+      }, 18);
     } else if (isDeleting && typedText.length === 0) {
       setIsDeleting(false);
       setPhraseIndex((prev) => (prev + 1) % TYPEWRITER_PHRASES.length);
@@ -60,7 +61,7 @@ export function Hero({ onOpenTerminal }: HeroProps) {
               LOC: {identity.location}
             </span>
             <span className="border border-[#ffb000]/40 bg-[#ffb000]/10 px-2.5 py-1 text-[#ffb000]">
-              AVAILABILITY: OPEN FOR MVP / SAAS
+              AVAILABILITY: OPEN FOR CONTRACTS / SAAS
             </span>
           </div>
 
@@ -68,12 +69,12 @@ export function Hero({ onOpenTerminal }: HeroProps) {
             data-reveal
             className="reveal text-xs sm:text-sm font-[var(--font-mono)] uppercase tracking-[0.24em] text-[#39ff14] transition-all duration-700"
           >
-            $ initialize --profile hassan
+            $ initialize --profile hassan_mughal
           </p>
 
           <h1
             data-reveal
-            className="reveal my-3 sm:my-4 text-[clamp(2.4rem,8.5vw,7.5rem)] leading-[0.95] sm:leading-[0.85] tracking-[-0.03em] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700 break-words"
+            className="reveal my-3 sm:my-4 text-[clamp(2.4rem,7.5vw,6.5rem)] leading-[0.95] sm:leading-[0.88] tracking-[-0.03em] font-[var(--font-display)] text-[#ffb000] drop-shadow-[0_0_30px_rgba(255,208,64,0.5)] transition-all duration-700 break-words"
           >
             {identity.name}
           </h1>
@@ -87,11 +88,9 @@ export function Hero({ onOpenTerminal }: HeroProps) {
 
           <p
             data-reveal
-            className="reveal ml-auto mt-6 sm:mt-8 max-w-[640px] border-r-2 border-[#ffb000] pr-4 sm:pr-5 text-[0.92rem] sm:text-[1.05rem] leading-relaxed text-[#b07800] transition-all duration-700 max-md:ml-0 max-md:border-l-2 max-md:border-r-0 max-md:pl-4 max-md:pr-0 max-md:text-left"
+            className="reveal ml-auto mt-6 sm:mt-8 max-w-[660px] border-r-2 border-[#ffb000] pr-4 sm:pr-5 text-[0.92rem] sm:text-[1.02rem] leading-relaxed text-[#b07800] transition-all duration-700 max-md:ml-0 max-md:border-l-2 max-md:border-r-0 max-md:pl-4 max-md:pr-0 max-md:text-left"
           >
-            Full-Stack Software Developer specializing in building high-performance web applications,
-            mobile platforms with React Native, and robust backend systems with Node.js and .NET Core.
-            Focused on clean architecture, type safety, and fast production delivery.
+            {identity.summary}
           </p>
 
           {/* Action CTAs */}
@@ -103,7 +102,7 @@ export function Hero({ onOpenTerminal }: HeroProps) {
               className="btn-crt-shimmer inline-flex min-h-[44px] items-center justify-center border border-[#ffb000] bg-[#ffb000]/10 px-6 sm:px-8 py-3 text-[0.82rem] sm:text-[0.85rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline transition-all duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)] active:scale-[0.97] cursor-pointer md:cursor-none"
               href="#projects"
             >
-              [ VIEW PROJECTS ]
+              [ VIEW 12+ PROJECTS ]
             </a>
 
             {onOpenTerminal && (
