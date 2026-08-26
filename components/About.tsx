@@ -18,29 +18,29 @@ export function About() {
 
       {/* 3 Key Metric Counter Cards */}
       <div data-reveal className="reveal mb-10 sm:mb-14 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.2)]">
-          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#ffb000] drop-shadow-[0_0_10px_rgba(255,176,0,0.5)]">
+        <div className="group border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:scale-[1.03] hover:-translate-y-1 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:shadow-[0_0_25px_rgba(255,176,0,0.35)] cursor-pointer md:cursor-none">
+          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#ffb000] drop-shadow-[0_0_10px_rgba(255,176,0,0.5)] transition-transform duration-200 group-hover:scale-110">
             12+
           </div>
-          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#39ff14]">
+          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#39ff14] transition-colors duration-200 group-hover:text-[#ffffff]">
             // Production Projects Shipped
           </div>
         </div>
 
-        <div className="border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.2)]">
-          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#ffb000] drop-shadow-[0_0_10px_rgba(255,176,0,0.5)]">
+        <div className="group border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:scale-[1.03] hover:-translate-y-1 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:shadow-[0_0_25px_rgba(255,176,0,0.35)] cursor-pointer md:cursor-none">
+          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#ffb000] drop-shadow-[0_0_10px_rgba(255,176,0,0.5)] transition-transform duration-200 group-hover:scale-110">
             02+ Yrs
           </div>
-          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#39ff14]">
+          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#39ff14] transition-colors duration-200 group-hover:text-[#ffffff]">
             // Full-Stack Industry Experience
           </div>
         </div>
 
-        <div className="border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.2)]">
-          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#39ff14] drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">
+        <div className="group border border-[#3a2a00] bg-[#0f0c00] p-4 sm:p-5 text-center transition-all duration-300 hover:scale-[1.03] hover:-translate-y-1 hover:border-[#39ff14] hover:bg-[#39ff14]/10 hover:shadow-[0_0_25px_rgba(57,255,20,0.35)] cursor-pointer md:cursor-none">
+          <div className="font-[var(--font-display)] text-3xl sm:text-4xl text-[#39ff14] drop-shadow-[0_0_10px_rgba(57,255,20,0.5)] transition-transform duration-200 group-hover:scale-110">
             1,000+
           </div>
-          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#b07800]">
+          <div className="mt-1.5 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-[#b07800] transition-colors duration-200 group-hover:text-[#39ff14]">
             // Monthly Users on Shipped SaaS
           </div>
         </div>
@@ -62,7 +62,7 @@ export function About() {
         </div>
 
         {/* Interactive Multi-Tab Terminal Inspector */}
-        <div className="border-2 border-[#b07800] bg-[#0f0c00] p-4 sm:p-6 shadow-[0_0_30px_rgba(255,176,0,0.2)]">
+        <div className="border-2 border-[#b07800] bg-[#0f0c00] p-4 sm:p-6 shadow-[0_0_30px_rgba(255,176,0,0.2)] transition-all duration-300 hover:border-[#ffb000] hover:shadow-[0_0_35px_rgba(255,176,0,0.35)]">
           {/* Header & Tabs */}
           <div className="mb-4 flex flex-wrap items-center justify-between border-b border-[#3a2a00] pb-3 gap-2">
             <div className="text-[0.68rem] sm:text-xs tracking-[0.2em] text-[#39ff14]">
@@ -75,8 +75,8 @@ export function About() {
                   onClick={() => setActiveTab(tab)}
                   className={`border px-2.5 py-1 text-[0.68rem] uppercase tracking-wider transition-all min-h-[36px] cursor-pointer md:cursor-none ${
                     activeTab === tab
-                      ? "border-[#ffb000] bg-[#ffb000]/15 text-[#ffb000] font-bold shadow-[0_0_10px_rgba(255,176,0,0.3)]"
-                      : "border-[#3a2a00] text-[#b07800] hover:text-[#ffb000]"
+                      ? "border-[#ffb000] bg-[#ffb000]/20 text-[#ffb000] font-bold shadow-[0_0_14px_rgba(255,176,0,0.45)] scale-105"
+                      : "border-[#3a2a00] text-[#b07800] hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:text-[#ffb000] hover:shadow-[0_0_10px_rgba(255,176,0,0.2)]"
                   }`}
                 >
                   [{tab}.json]

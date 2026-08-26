@@ -69,6 +69,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "GoHighLevel", "Google Maps", "NeonDB", "Drizzle", "TanStack Query"],
     summary:
       "Enterprise booking and scheduling platform with Google Calendar-style consultant availability, master scheduling, and GoHighLevel API sync used by 1,000+ monthly users.",
+    liveUrl:"https://blessed-beginnings.vercel.app/",
     githubUrl: "https://github.com/oye-hunter",
     caseStudy: {
       overview:
@@ -97,7 +98,8 @@ export const projects: Project[] = [
     stack: ["React Native", "Expo", "Next.js", "Groq AI", "NeonDB", "Drizzle", "Better Auth"],
     summary:
       "AI-powered customer risk profiling platform for digital onboarding analyzing KYC documents with deterministic signal engines and Groq-powered AI agents.",
-    githubUrl: "https://github.com/oye-hunter",
+    liveUrl: "https://parakh-webapp.vercel.app/",
+    githubUrl: "https://github.com/oye-hunter/parakh",
     caseStudy: {
       overview:
         "Customer risk profiling and KYC verification platform engineered to detect digital onboarding fraud through deterministic cross-field validation paired with Groq LLM reasoning.",
@@ -124,7 +126,7 @@ export const projects: Project[] = [
     stack: ["React Native", "Next.js", "AI Agents", "Gemini LLM", "NeonDB", "Drizzle", "Google Maps"],
     summary:
       "AI-powered multi-lingual service platform converting natural language in English, Urdu, and Roman Urdu into automated technician dispatching via a TypeScript agent pipeline.",
-    githubUrl: "https://github.com/oye-hunter",
+    githubUrl: "https://github.com/oye-hunter/servis-ai",
     caseStudy: {
       overview:
         "Autonomous service booking application that accepts conversational voice and text prompts in regional languages (English, Urdu, Roman Urdu) and orchestrates technician matching.",
@@ -151,7 +153,8 @@ export const projects: Project[] = [
     stack: ["Next.js", "Groq AI", "WhatsApp Cloud API", "NeonDB", "Drizzle"],
     summary:
       "Intelligent facility dispatch bot that interprets natural language tenant requests over WhatsApp into structured maintenance tickets and automated provider schedules.",
-    githubUrl: "https://github.com/oye-hunter",
+    liveUrl: "https://whatsapp-bot-web-two.vercel.app/",
+    githubUrl: "https://github.com/oye-hunter/whatsapp-bot",
     caseStudy: {
       overview:
         "Automated WhatsApp-based facility maintenance dispatcher that transforms unstructured resident messages into actionable work orders and provider schedules.",
@@ -178,7 +181,8 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Better Auth", "NeonDB", "Drizzle"],
     summary:
       "Static email client with authentication, role-based route middleware protection, and type-safe database queries.",
-    githubUrl: "https://github.com/oye-hunter",
+    liveUrl: "https://project-relay.vercel.app/",
+    githubUrl: "https://github.com/oye-hunter/project-relay",
     caseStudy: {
       overview:
         "High-performance static email client delivering instantaneous inbox rendering, session protection, and type-safe database sync for developer workflows.",
@@ -205,6 +209,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Supabase", "TypeScript", "KNN Models"],
     summary:
       "AI-driven workout and diet recommendation engine with KNN classification, live community feed, and health metric tracking.",
+    liveUrl: "https://the-fit-fusion.netlify.app/landing",
     githubUrl: "https://github.com/oye-hunter",
     caseStudy: {
       overview:
@@ -232,6 +237,7 @@ export const projects: Project[] = [
     stack: ["React Native", "Supabase", "Stripe", "Google APIs"],
     summary:
       "Mobile marketplace for trucking operations featuring live quote bidding, Stripe escrow payments, and continuous GPS location tracking.",
+    liveUrl: "https://fleetcompanion.io/",
     githubUrl: "https://github.com/oye-hunter",
     caseStudy: {
       overview:
@@ -367,6 +373,7 @@ export const projects: Project[] = [
     stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
     summary:
       "Full-stack marketplace combining peer-to-peer book sales with academic tutor discovery and REST API backend.",
+    liveUrl: "https://book-brary.vercel.app/",
     githubUrl: "https://github.com/oye-hunter",
     caseStudy: {
       overview:
