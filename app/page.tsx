@@ -38,18 +38,22 @@ export default function Home() {
 
     document.addEventListener("mousemove", moveCursor);
 
-    // Global event delegation for custom cursor scaling on interactive elements (including dynamically rendered ones)
+    // Global event delegation for custom cursor scaling on interactive elements across all sections
+    const interactiveSelector = "a, button, input, textarea, select, article, [role='button'], .cursor-pointer, .group, [data-hover]";
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target?.closest("a, button, input, textarea")) {
-        cursor?.classList.add("w-9", "h-9", "opacity-60");
+      if (target?.closest(interactiveSelector)) {
+        cursor?.classList.add("w-9", "h-9", "opacity-75", "border-[#39ff14]", "shadow-[0_0_16px_#39ff14]");
+        cursor?.classList.remove("border-[#ffb000]");
       }
     };
 
     const handleMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target?.closest("a, button, input, textarea")) {
-        cursor?.classList.remove("w-9", "h-9", "opacity-60");
+      if (target?.closest(interactiveSelector)) {
+        cursor?.classList.remove("w-9", "h-9", "opacity-75", "border-[#39ff14]", "shadow-[0_0_16px_#39ff14]");
+        cursor?.classList.add("border-[#ffb000]");
       }
     };
 
@@ -181,7 +185,7 @@ export default function Home() {
       </main>
 
       <a
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10] border border-[#b07800] bg-[#0f0c00]/95 px-3.5 sm:px-4 py-2.5 font-[var(--font-mono)] text-[0.7rem] sm:text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:border-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.45)] cursor-pointer md:cursor-none min-h-[44px] inline-flex items-center"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[10] border border-[#b07800] bg-[#0f0c00]/95 px-3.5 sm:px-4 py-2.5 font-[var(--font-mono)] text-[0.7rem] sm:text-[0.72rem] uppercase tracking-[0.12em] text-[#ffb000] no-underline shadow-[0_0_16px_rgba(255,176,0,0.25)] transition-all duration-200 hover:scale-105 hover:border-[#ffb000] hover:bg-[#ffb000]/15 hover:shadow-[0_0_25px_rgba(255,176,0,0.5)] cursor-pointer md:cursor-none min-h-[44px] inline-flex items-center"
         href="/resume.pdf"
         download="Muhammad-Hassan-Mughal-CV.pdf"
         aria-label="Download CV"

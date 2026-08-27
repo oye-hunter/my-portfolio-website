@@ -36,19 +36,25 @@ export function Contact() {
       <div className="grid gap-8 sm:gap-12 lg:grid-cols-2">
         <div data-reveal className="reveal">
           <p className="mb-6 sm:mb-8 text-[0.95rem] sm:text-[1rem] leading-relaxed text-[#b07800]">
-            If you are building a SaaS product, validating an MVP, or scaling an existing system, I can
-            contribute across architecture, implementation, and delivery.
+            If you are building a SaaS product, integrating AI agent workflows, validating an MVP, or scaling an existing system, I can
+            contribute across architecture, full-stack implementation, and production delivery.
           </p>
 
           <div className="flex flex-col gap-3">
             <a
-              className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none break-all"
+              className="flex min-h-[48px] items-center gap-3 border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-all duration-200 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:text-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.3)] cursor-pointer md:cursor-none break-all"
+              href={`tel:${contact.phone.replace(/[^0-9+]/g, "")}`}
+            >
+              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">#</span> {contact.phone}
+            </a>
+            <a
+              className="flex min-h-[48px] items-center gap-3 border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-all duration-200 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:text-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.3)] cursor-pointer md:cursor-none break-all"
               href={`mailto:${contact.email}`}
             >
               <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">@</span> {contact.email}
             </a>
             <a
-              className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none break-all"
+              className="flex min-h-[48px] items-center gap-3 border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-all duration-200 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:text-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.3)] cursor-pointer md:cursor-none break-all"
               href={contact.github}
               target="_blank"
               rel="noreferrer"
@@ -56,7 +62,7 @@ export function Contact() {
               <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">/</span> github.com/oye-hunter
             </a>
             <a
-              className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none break-all"
+              className="flex min-h-[48px] items-center gap-3 border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-all duration-200 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-[#ffb000] hover:bg-[#ffb000]/10 hover:text-[#ffb000] hover:shadow-[0_0_20px_rgba(255,176,0,0.3)] cursor-pointer md:cursor-none break-all"
               href={contact.linkedin}
               target="_blank"
               rel="noreferrer"
@@ -64,11 +70,11 @@ export function Contact() {
               <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">in</span> linkedin.com/in/hassan814
             </a>
             <a
-              className="flex min-h-[44px] items-center gap-3 border border-transparent px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-colors duration-200 hover:border-[#3a2a00] hover:text-[#ffb000] cursor-pointer md:cursor-none"
+              className="flex min-h-[48px] items-center gap-3 border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-mono)] text-[0.82rem] sm:text-[0.85rem] tracking-[0.08em] text-[#b07800] transition-all duration-200 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-[#39ff14] hover:bg-[#39ff14]/10 hover:text-[#39ff14] hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] cursor-pointer md:cursor-none"
               href={contact.resume}
-              download
+              download="Muhammad-Hassan-Mughal-CV.pdf"
             >
-              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">↓</span> Download Resume
+              <span className="w-5 text-center text-[1.1rem] text-[#39ff14]">↓</span> Download Resume (PDF)
             </a>
           </div>
         </div>
@@ -86,7 +92,7 @@ export function Contact() {
               onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
               placeholder="Your name"
               required
-              className="min-h-[44px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-colors duration-200 placeholder:text-[#b07800]/70 focus:border-[#b07800] focus:shadow-[0_0_12px_rgba(255,176,0,0.1)] cursor-pointer md:cursor-none"
+              className="min-h-[44px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-all duration-200 placeholder:text-[#b07800]/70 hover:border-[#b07800] focus:border-[#ffb000] focus:shadow-[0_0_15px_rgba(255,176,0,0.25)] cursor-pointer md:cursor-none"
             />
           </div>
 
@@ -102,7 +108,7 @@ export function Contact() {
               onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
               placeholder="you@company.com"
               required
-              className="min-h-[44px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-colors duration-200 placeholder:text-[#b07800]/70 focus:border-[#b07800] focus:shadow-[0_0_12px_rgba(255,176,0,0.1)] cursor-pointer md:cursor-none"
+              className="min-h-[44px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-all duration-200 placeholder:text-[#b07800]/70 hover:border-[#b07800] focus:border-[#ffb000] focus:shadow-[0_0_15px_rgba(255,176,0,0.25)] cursor-pointer md:cursor-none"
             />
           </div>
 
@@ -117,12 +123,12 @@ export function Contact() {
               onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
               placeholder="Tell me about your product, scope, and timeline"
               required
-              className="min-h-[130px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-colors duration-200 placeholder:text-[#b07800]/70 focus:border-[#b07800] focus:shadow-[0_0_12px_rgba(255,176,0,0.1)] cursor-pointer md:cursor-none"
+              className="min-h-[130px] border border-[#3a2a00] bg-[#0f0c00] px-4 py-3 font-[var(--font-body)] text-[1rem] sm:text-[0.95rem] text-[#ffb000] outline-none transition-all duration-200 placeholder:text-[#b07800]/70 hover:border-[#b07800] focus:border-[#ffb000] focus:shadow-[0_0_15px_rgba(255,176,0,0.25)] cursor-pointer md:cursor-none"
             />
           </div>
 
           <button
-            className="btn-crt-shimmer mt-2 inline-flex min-h-[44px] w-full sm:w-fit items-center justify-center border border-[#ffb000] px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.15em] text-[#ffb000] transition-all duration-200 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_20px_rgba(255,208,64,0.5)] active:scale-[0.97] cursor-pointer md:cursor-none"
+            className="btn-crt-shimmer mt-2 inline-flex min-h-[44px] w-full sm:w-fit items-center justify-center border border-[#ffb000] bg-[#ffb000]/10 px-8 py-3 font-[var(--font-mono)] text-[0.85rem] uppercase tracking-[0.15em] text-[#ffb000] transition-all duration-200 hover:scale-105 hover:bg-[#ffb000] hover:text-[#0a0800] hover:shadow-[0_0_25px_rgba(255,208,64,0.6)] active:scale-[0.97] cursor-pointer md:cursor-none"
             type="submit"
           >
             Send Message

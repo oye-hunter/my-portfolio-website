@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { contact, identity, projects, skills } from "./portfolio-data";
+import { contact, education, identity, projects, skills } from "./portfolio-data";
 
 type TerminalModalProps = {
   isOpen: boolean;
@@ -22,22 +22,22 @@ type GameState = {
 
 const QUIZ_QUESTIONS = [
   {
-    q: "Q1 // Which ORM provides type-safe queries in Project Relay's serverless architecture?",
-    options: ["1) Prisma", "2) Drizzle ORM", "3) TypeORM"],
+    q: "Q1 // Which library did Hassan use at Komatsu Pakistan Soft to eliminate full table re-rendering issues?",
+    options: ["1) Ag-Grid", "2) TanStack Table", "3) DataTables.js"],
     correct: 2,
-    explanation: "Drizzle ORM paired with Neon Serverless DB delivers zero-cold-start performance."
+    explanation: "TanStack Table was optimized to isolate row-level state updates and reduce redundant re-renders."
   },
   {
-    q: "Q2 // What state management library is paired with React Query in Hassan's stack?",
-    options: ["1) Zustand", "2) Redux Toolkit", "3) Recoil"],
+    q: "Q2 // What AI model engine powers the sub-400ms KYC risk evaluation agent in Parakh?",
+    options: ["1) Groq AI (LLaMA)", "2) Claude 3.5 Sonnet", "3) BERT Classifier"],
     correct: 1,
-    explanation: "Zustand provides lightweight, atomic client state management."
+    explanation: "Groq LPU hardware acceleration powers instantaneous risk evaluations with explainable reasoning."
   },
   {
-    q: "Q3 // Which real-time protocol powers the live community feed in Fit-Fusion AI SaaS?",
-    options: ["1) HTTP Polling", "2) Supabase WebSockets", "3) Server-Sent Events"],
+    q: "Q3 // Which multi-lingual LLM parses English, Urdu, and Roman Urdu in the Servis AI agent pipeline?",
+    options: ["1) Whisper", "2) Gemini LLM", "3) DeepL"],
     correct: 2,
-    explanation: "Supabase Realtime WebSockets stream instant updates across active clients."
+    explanation: "Gemini LLM powers the multi-agent TypeScript intent extraction and provider ranking pipeline."
   }
 ];
 
@@ -49,10 +49,10 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
       command: "sys_init",
       output: (
         <div className="space-y-1">
-          <p className="text-[#39ff14] font-bold">Matrix CRT Interactive Terminal v1.2.0</p>
+          <p className="text-[#39ff14] font-bold">Matrix CRT Interactive Terminal v2.0.0</p>
           <p className="text-[#b07800]">
             Type <span className="text-[#ffb000]">&apos;help&apos;</span> for commands,{" "}
-            <span className="text-[#ffb000]">&apos;game&apos;</span> for Easter Egg challenge, or{" "}
+            <span className="text-[#ffb000]">&apos;game&apos;</span> for Cyber Hacker challenge, or{" "}
             <span className="text-[#ffb000]">&apos;exit&apos;</span> to close.
           </p>
         </div>
@@ -160,8 +160,8 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
                 </p>
                 <p className="text-xs text-[#b07800]">
                   {finalPercent === 100
-                    ? "★ PERFECT CLEAR! Master level architecture knowledge confirmed."
-                    : "Good effort! Terminal system unlocked."}
+                    ? "★ PERFECT CLEAR! Full-Stack & AI Architecture Mastery verified."
+                    : "Terminal decrypted successfully."}
                 </p>
                 <div className="border-t border-[#39ff14]/40 pt-2 text-[0.7rem] text-[#39ff14]">
                   DECRYPTION KEY: HASSAN_DEV_2026 // TYPE &apos;help&apos; TO RESUME
@@ -183,12 +183,13 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
           <div className="space-y-1.5 text-[#b07800]">
             <p className="text-[#ffb000] font-semibold border-b border-[#3a2a00] pb-1">{`AVAILABLE COMMANDS:`}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 pt-1">
-              <p><span className="text-[#39ff14]">about</span> - Developer profile & role</p>
-              <p><span className="text-[#39ff14]">projects</span> - Featured SaaS & Mobile apps</p>
-              <p><span className="text-[#39ff14]">skills</span> - Full tech stack breakdown</p>
+              <p><span className="text-[#39ff14]">about</span> - Developer profile & experience</p>
+              <p><span className="text-[#39ff14]">projects</span> - List 12 featured production apps</p>
+              <p><span className="text-[#39ff14]">skills</span> - Full tech stack & AI models</p>
+              <p><span className="text-[#39ff14]">education</span> - University degree details</p>
               <p><span className="text-[#39ff14]">game</span> - Play Retro Cyber Hacker Quiz</p>
-              <p><span className="text-[#39ff14]">contact</span> - Direct contact channels</p>
-              <p><span className="text-[#39ff14]">cat resume</span> - View / Download CV</p>
+              <p><span className="text-[#39ff14]">contact</span> - Direct phone & email channels</p>
+              <p><span className="text-[#39ff14]">cat resume</span> - View / Download PDF CV</p>
               <p><span className="text-[#39ff14]">reboot</span> - Replay BIOS boot sequence</p>
               <p><span className="text-[#39ff14]">clear</span> - Clear terminal window</p>
               <p><span className="text-[#39ff14]">exit</span> - Close terminal modal</p>
@@ -222,18 +223,31 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
           <div className="space-y-1 border-l-2 border-[#ffb000] pl-3 py-1 text-[#b07800]">
             <p className="text-[#ffb000] font-bold text-[0.92rem]">{identity.name}</p>
             <p>{identity.role} — {identity.specialization}</p>
-            <p>Experience: {identity.experience} | Current: {identity.currentRole}</p>
-            <p>Location: {identity.location}</p>
+            <p>Current: <span className="text-[#39ff14]">{identity.currentRole}</span></p>
+            <p>Experience: {identity.experience} | Location: {identity.location}</p>
+            <p>Phone: {identity.phone} | Availability: {identity.availability}</p>
+          </div>
+        );
+        break;
+
+      case "education":
+        output = (
+          <div className="space-y-1 border-l-2 border-[#39ff14] pl-3 py-1 text-[#b07800]">
+            <p className="text-[#ffb000] font-bold">{education.degree}</p>
+            <p>{education.institution} ({education.location})</p>
+            <p className="text-xs text-[#39ff14]">{education.duration}</p>
           </div>
         );
         break;
 
       case "projects":
         output = (
-          <div className="space-y-2 py-1">
-            {projects.slice(0, 6).map((p) => (
+          <div className="space-y-2.5 py-1">
+            {projects.map((p) => (
               <div key={p.id} className="border-l-2 border-[#39ff14] pl-3">
-                <p className="text-[#ffb000] font-bold">{p.name} <span className="text-xs text-[#b07800]">[{p.stack.join(", ")}]</span></p>
+                <p className="text-[#ffb000] font-bold">
+                  {p.id}. {p.name} <span className="text-xs text-[#b07800]">[{p.stack.join(", ")}]</span>
+                </p>
                 <p className="text-xs text-[#b07800]">{p.summary}</p>
               </div>
             ))}
@@ -257,6 +271,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
       case "contact":
         output = (
           <div className="space-y-1 py-1 text-[#b07800]">
+            <p>Phone: <span className="text-[#ffb000] font-mono">{contact.phone}</span></p>
             <p>Email: <span className="text-[#ffb000] font-mono">{contact.email}</span></p>
             <p>GitHub: <a href={contact.github} target="_blank" rel="noreferrer" className="text-[#39ff14] hover:underline">{contact.github}</a></p>
             <p>LinkedIn: <a href={contact.linkedin} target="_blank" rel="noreferrer" className="text-[#39ff14] hover:underline">{contact.linkedin}</a></p>
@@ -304,7 +319,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
     setInput("");
   };
 
-  const quickCommands = ["help", "game", "about", "projects", "skills", "contact", "clear", "exit"];
+  const quickCommands = ["help", "game", "about", "projects", "skills", "education", "contact", "clear", "exit"];
 
   return (
     <div
@@ -321,7 +336,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
         {/* Terminal Header */}
         <div className="mb-3 sm:mb-4 flex items-center justify-between border-b border-[#3a2a00] pb-2 sm:pb-3">
           <div className="font-[var(--font-mono)] text-[0.7rem] sm:text-xs tracking-[0.2em] text-[#39ff14] flex items-center gap-2">
-            <span>● ● ● CRT_TERMINAL</span>
+            <span>● ● ● CRT_TERMINAL_V2</span>
             {gameState?.active ? (
               <span className="animate-pulse text-[0.6rem] sm:text-[0.65rem] bg-[#ffb000]/15 border border-[#ffb000] px-1.5 py-0.5 text-[#ffb000]">GAME_ACTIVE</span>
             ) : (
@@ -378,7 +393,7 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={gameState?.active ? "enter answer [1-3] or 'quit'..." : "type command (e.g. game, help, projects)..."}
+            placeholder={gameState?.active ? "enter answer [1-3] or 'quit'..." : "type command (e.g. game, help, projects, education)..."}
             aria-label="Terminal command input"
             className="w-full bg-transparent font-[var(--font-mono)] text-[1rem] sm:text-[0.85rem] text-[#ffb000] outline-none placeholder:text-[#3a2a00] min-h-[40px] cursor-pointer md:cursor-none"
           />
@@ -388,4 +403,3 @@ export function TerminalModal({ isOpen, onClose, onReboot }: TerminalModalProps)
     </div>
   );
 }
-

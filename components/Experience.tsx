@@ -103,14 +103,14 @@ export function Experience() {
             const nodeNum = String(idx + 1).padStart(2, "0");
 
             return (
-              <div key={`${item.duration}-${item.company}`} className="relative group">
+              <div key={`${item.duration}-${item.company}`} className="relative group/item">
                 {/* Illuminated Node Indicator */}
                 <div className="absolute -left-8 sm:-left-12 top-1.5 flex items-center justify-center">
                   <div
-                    className={`relative z-10 flex h-6 sm:h-7 w-6 sm:w-7 items-center justify-center border text-[0.65rem] font-bold transition-all duration-300 ${
+                    className={`relative z-10 flex h-6 sm:h-7 w-6 sm:w-7 items-center justify-center border text-[0.65rem] font-bold transition-all duration-300 group-hover/item:scale-125 ${
                       isActive
                         ? "border-[#39ff14] bg-[#39ff14] text-[#0a0800] shadow-[0_0_15px_#39ff14]"
-                        : "border-[#3a2a00] bg-[#0f0c00] text-[#b07800]"
+                        : "border-[#3a2a00] bg-[#0f0c00] text-[#b07800] group-hover/item:border-[#ffb000] group-hover/item:text-[#ffb000]"
                     }`}
                   >
                     {nodeNum}
@@ -120,17 +120,18 @@ export function Experience() {
                   </div>
                 </div>
 
-                {/* Animated Experience Card */}
+                {/* Animated Experience Card with Interactive Hover */}
                 <article
-                  className={`timeline-card border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-300 ${
-                    isActive ? "is-active" : "border-[#3a2a00] hover:border-[#b07800]"
+                  className={`timeline-card border bg-[#0f0c00] p-5 sm:p-7 transition-all duration-300 hover:scale-[1.01] hover:-translate-y-1 hover:border-[#ffb000] hover:bg-[#ffb000]/5 hover:shadow-[0_0_30px_rgba(255,176,0,0.3)] cursor-pointer md:cursor-none ${
+                    isActive ? "is-active" : "border-[#3a2a00]"
                   }`}
                 >
                   <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-[#3a2a00] pb-3">
-                    <span className="text-[0.72rem] sm:text-[0.78rem] uppercase tracking-[0.15em] text-[#39ff14]">
+                    <span className="text-[0.72rem] sm:text-[0.78rem] uppercase tracking-[0.15em] text-[#39ff14] flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#39ff14]" />
                       {item.duration}
                     </span>
-                    <span className="border border-[#3a2a00] bg-[#0a0800] px-2.5 py-0.5 text-[0.68rem] text-[#b07800]">
+                    <span className="border border-[#3a2a00] bg-[#0a0800] px-2.5 py-0.5 text-[0.68rem] text-[#b07800] transition-colors duration-200 hover:border-[#39ff14] hover:text-[#39ff14]">
                       {item.company}
                     </span>
                   </div>
@@ -139,9 +140,20 @@ export function Experience() {
                     {item.role}
                   </h3>
 
-                  <p className="text-[0.88rem] sm:text-[0.92rem] leading-relaxed text-[#b07800]">
+                  <p className="text-[0.88rem] sm:text-[0.92rem] leading-relaxed text-[#b07800] mb-3">
                     {item.summary}
                   </p>
+
+                  {item.bullets && item.bullets.length > 0 && (
+                    <ul className="space-y-1.5 border-t border-[#3a2a00]/50 pt-3 text-[0.82rem] text-[#b07800]">
+                      {item.bullets.slice(0, 3).map((bullet, bIdx) => (
+                        <li key={bIdx} className="flex items-start gap-2">
+                          <span className="text-[#39ff14] mt-0.5">&gt;</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </article>
               </div>
             );
