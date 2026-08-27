@@ -149,12 +149,22 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Footer Actions */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#3a2a00] pt-4">
           <div className="flex flex-wrap gap-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-crt-shimmer border border-[#39ff14] bg-[#39ff14]/10 px-4 py-2 text-xs uppercase tracking-widest text-[#39ff14] min-h-[44px] inline-flex items-center cursor-pointer md:cursor-none hover:bg-[#39ff14] hover:text-[#0a0800]"
+              >
+                [ LIVE SITE ]
+              </a>
+            )}
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-crt-shimmer border border-[#39ff14] px-4 py-2 text-xs uppercase tracking-widest text-[#39ff14] min-h-[44px] inline-flex items-center cursor-pointer md:cursor-none"
+                className="btn-crt-shimmer border border-[#ffb000] px-4 py-2 text-xs uppercase tracking-widest text-[#ffb000] min-h-[44px] inline-flex items-center cursor-pointer md:cursor-none hover:border-[#39ff14] hover:text-[#39ff14]"
               >
                 [ GITHUB REPO ]
               </a>

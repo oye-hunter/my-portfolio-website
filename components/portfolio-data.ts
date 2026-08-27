@@ -126,6 +126,7 @@ export const projects: Project[] = [
     stack: ["React Native", "Next.js", "AI Agents", "Gemini LLM", "NeonDB", "Drizzle", "Google Maps"],
     summary:
       "AI-powered multi-lingual service platform converting natural language in English, Urdu, and Roman Urdu into automated technician dispatching via a TypeScript agent pipeline.",
+    liveUrl: "https://drive.google.com/file/d/1jD33nBKBtR05XnNG9iCoO3he_v_MwKXA/view?usp=sharing",
     githubUrl: "https://github.com/oye-hunter/servis-ai",
     caseStudy: {
       overview:

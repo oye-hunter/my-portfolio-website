@@ -131,13 +131,25 @@ function ProjectCard({
           [ CASE STUDY ]
         </button>
         <div className="flex items-center gap-3">
-          <a
-            className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
-            href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            Demo
-          </a>
+          {project.liveUrl ? (
+            <a
+              className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#39ff14] hover:text-[#39ff14] text-[#39ff14]/90 font-bold cursor-pointer md:cursor-none"
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Live
+            </a>
+          ) : (
+            <a
+              className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
+              href={`mailto:${contact.email}?subject=Live%20Demo%20Request%20-%20${encodeURIComponent(project.name)}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              Demo
+            </a>
+          )}
           {project.githubUrl ? (
             <a
               className="inline-flex min-h-[44px] items-center border-b border-transparent transition-colors duration-200 hover:border-[#ffb000] hover:text-[#ffb000] cursor-pointer md:cursor-none"
